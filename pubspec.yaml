@@ -9,30 +9,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+
 flutter:
   uses-material-design: true
-#  assets:
-#    - assets/images/home.png
-#    - assets/images/chatbot.png
-#    - assets/images/curriculum.png
-#    - assets/images/mypage.png
 
-#  ## 폰트 추가
-#  fonts:
-#    - family: Pretendard
-#      fonts:
-#        - asset: assets/fonts/pretendard/pretendard_regular.ttf
-#          weight: 400
-#        - asset: assets/fonts/pretendard/pretendard_medium.ttf
-#          weight: 500
-#        - asset: assets/fonts/pretendard/pretendard_semiBold.ttf
-#          weight: 600
-#        - asset: assets/fonts/pretendard/pretendard_bold.ttf
-#          weight: 700
+  assets:
+    - assets/images/home_click.png
+    - assets/images/chatbot.png
+    - assets/images/curriculum.png
+    - assets/images/mypage.png
+
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/pretendard/pretendard_regular.ttf
+          weight: 400
+        - asset: assets/fonts/pretendard/pretendard_medium.ttf
+          weight: 500
+        - asset: assets/fonts/pretendard/pretendard_semiBold.ttf
+          weight: 600
+        - asset: assets/fonts/pretendard/pretendard_bold.ttf
+          weight: 700
