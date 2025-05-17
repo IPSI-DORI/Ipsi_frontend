@@ -44,7 +44,42 @@ class _ChatScreenState extends State<ChatScreen> {
         elevation: 0.5,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () async {
+        final shouldExit = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+            title: const Text(
+            '나가시겠어요?',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            ),
+            content: const Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: Text(
+              '나가면 대화 내역이 사라집니다',
+              style: TextStyle(
+              color: Colors.grey,
+              fontSize: 14,
+              ),
+            ),
+            ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('취소'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('나가기'),
+            ),
+          ],
+            );
+          },
+        );
+        if (shouldExit == true) {
+          Navigator.of(context).maybePop();
+        }
+          },
         ),
         title: const Text(
           '채팅',
