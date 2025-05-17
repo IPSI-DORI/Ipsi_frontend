@@ -15,7 +15,7 @@ class ChatViewModel with ChangeNotifier {
       [
         "2025년도 한양대학교 응용학과 정시 합격선은?",
         "추천 모의고사 문제집은?",
-        "내신 2등급인데 서강대학교 합격 가능 성은?"
+        "내신 2등급인데 서강대학교 합격 가능성은?"
       ],
     );
   }
@@ -58,7 +58,7 @@ class ChatViewModel with ChangeNotifier {
       type: MessageType.bot,
       timestamp: DateTime.now(),
       options: options,
-      profileImage: "assets/images/bot_avatar.png",
+      profileImage: "assets/images/icon/bot_avatar.png",
     ));
     
     notifyListeners();

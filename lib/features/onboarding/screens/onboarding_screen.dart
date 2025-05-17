@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/features/signup/screens/signup_screen.dart';
+import '../../home/screens/home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -62,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           // 카카오톡 버튼
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFFFE812), // 배경색

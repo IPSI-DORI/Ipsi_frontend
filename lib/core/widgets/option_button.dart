@@ -15,6 +15,7 @@ class OptionButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,

@@ -43,6 +43,7 @@ flutter:
     - assets/images/icon/glass_chat.png
     - assets/images/icon/glass_calendar.png
     - assets/images/icon/kakao.png
+    - assets/images/icon/bot_avatar.png
 
 
   fonts:

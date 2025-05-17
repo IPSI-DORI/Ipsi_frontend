@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/chat_view_model.dart';
 import '../models/message_model.dart';
+import 'package:intl/intl.dart';
 import '../../../core/widgets/message_bubble.dart';
 import '../../../core/widgets/option_button.dart';
 
@@ -92,26 +93,101 @@ class _ChatScreenState extends State<ChatScreen> {
                   itemCount: viewModel.messages.length,
                   itemBuilder: (context, index) {
                     final message = viewModel.messages[index];
+                    final isBot = message.type == MessageType.bot;
+                    final hasOptions = message.options != null && message.options!.isNotEmpty;
+                    //final timeString = DateFormat('a h:mm').format(message.timestamp);
+
+                    // 옵션이 있는 봇 메시지라면, 말풍선 안에 옵션 버튼을 포함
+                    if (isBot && hasOptions) {
+                      final timeString = DateFormat('a h:mm').format(message.timestamp);
+                      return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 2, bottom: 4),
+                        ),
+                        Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Bot 프로필 이미지
+                          Padding(
+                          padding: const EdgeInsets.only(right: 8.0, top: 4),
+                          child: CircleAvatar(
+                            backgroundImage: const AssetImage("assets/images/icon/bot_avatar.png"),
+                            backgroundColor: Colors.teal[100],
+                            radius: 16,
+                          ),
+                          ),
+                          // 메시지 + 옵션
+                          Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                            Container(
+                              decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(16),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                              margin: const EdgeInsets.only(bottom: 4, top: 0),
+                              child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                message.text,
+                                style: const TextStyle(fontSize: 15, color: Colors.black87),
+                                ),
+                                const SizedBox(height: 10),
+                                ...message.options!.map((option) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 8),
+                                  child: OptionButton(
+                                    text: option,
+                                    onTap: () => viewModel.selectOption(option),
+                                  ),
+                                  )),
+                              ],
+                              ),
+                            ),
+                            // 시간 표시를 오른쪽 아래로 이동
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 4, top: 0, bottom: 8),
+                                child: Text(
+                                timeString,
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 10,
+                                ),
+                                ),
+                              ),
+                              ],
+                            ),
+                            ],
+                          ),
+                          ),
+                        ],
+                        ),
+                      ],
+                      );
+                    }
+
+                    // 일반 메시지(유저/옵션 없는 봇)
                     return Column(
                       crossAxisAlignment: message.type == MessageType.user
                           ? CrossAxisAlignment.end
                           : CrossAxisAlignment.start,
                       children: [
                         MessageBubble(message: message),
-                        if (message.options != null && message.type == MessageType.bot)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8, bottom: 16),
-                            child: Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              children: message.options!
-                                  .map((option) => OptionButton(
-                                        text: option,
-                                        onTap: () => viewModel.selectOption(option),
-                                      ))
-                                  .toList(),
-                            ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: message.type == MessageType.user ? 0 : 8.0,
+                            right: message.type == MessageType.user ? 8.0 : 0,
+                            top: 2,
+                            bottom: 8,
                           ),
+                        ),
                       ],
                     );
                   },
@@ -157,16 +233,21 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                         textInputAction: TextInputAction.send,
                         onSubmitted: (text) {
-                          viewModel.sendMessage(text);
-                          _textController.clear();
+                          if (text.trim().isNotEmpty) {
+                            viewModel.sendMessage(text.trim());
+                            _textController.clear();
+                          }
                         },
                       ),
                     ),
                     IconButton(
                       icon: const Icon(Icons.send, color: Colors.teal),
                       onPressed: () {
-                        viewModel.sendMessage(_textController.text);
-                        _textController.clear();
+                        final text = _textController.text.trim();
+                        if (text.isNotEmpty) {
+                          viewModel.sendMessage(text);
+                          _textController.clear();
+                        }
                       },
                     ),
                   ],
