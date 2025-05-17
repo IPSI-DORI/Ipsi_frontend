@@ -64,30 +64,36 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             ),
             actions: [
-            TextButton(
-             style: TextButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
+              Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('취소'),
+                ),
+                const SizedBox(width: 8),
+                TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.teal,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('나가기'),
+                ),
+              ],
               ),
-              ),
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('취소'),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-              backgroundColor: Colors.teal, // 에메랄드색(Teal)
-              foregroundColor: Colors.white, // 글자색 흰색
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
-              ),
-              ),
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('나가기'),
-            ),
             ],
             );
           },
