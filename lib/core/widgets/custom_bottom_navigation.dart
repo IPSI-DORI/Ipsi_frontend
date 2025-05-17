@@ -34,7 +34,7 @@ class CustomBottomNavigation extends StatelessWidget {
         return BottomNavigationBarItem(
           label: item.label,
           icon: Image.asset(
-            'assets/images/${item.iconName}${isSelected ? '_click' : ''}.png',
+            'assets/images/bottombar/${item.iconName}${isSelected ? '_click' : ''}.png',
             width: 24,
             height: 24,
           ),
