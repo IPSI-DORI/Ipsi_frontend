@@ -20,14 +20,27 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/home_click.png
-    - assets/images/home.png
-    - assets/images/chatbot.png
-    - assets/images/chatbot_click.png
-    - assets/images/curriculum.png
-    - assets/images/curriculum_click.png
-    - assets/images/mypage.png
-    - assets/images/mypage_click.png
+    - assets/images/bottombar/home.png
+    - assets/images/bottombar/home_click.png
+    - assets/images/bottombar/chatbot_click.png
+    - assets/images/bottombar/chatbot.png
+    - assets/images/bottombar/curriculum.png
+    - assets/images/bottombar/curriculum_click.png
+    - assets/images/bottombar/mypage.png
+    - assets/images/bottombar/mypage_click.png
+    - assets/images/characters/raggy.png
+    - assets/images/characters/morrie.png
+    - assets/images/characters/dori.png
+    - assets/images/characters/norrie.png
+    - assets/images/icon/alert.png
+    - assets/images/icon/back.png
+    - assets/images/icon/cancel.png
+    - assets/images/icon/next.png
+    - assets/images/icon/search.png
+    - assets/images/icon/glass_chat.png
+    - assets/images/icon/glass_calendar.png
+    - assets/images/icon/kakao.png
+
 
   fonts:
     - family: Pretendard
