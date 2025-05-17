@@ -24,10 +24,10 @@ class OnboardingBottomBar extends StatelessWidget {
   });
 
 
-  // 바텀바
+  // ui
   @override
   Widget build(BuildContext context) {
-    if (isLastPage) {
+    if (isLastPage) {   // 마지막 페이지일 경우
       return Padding(
         padding: const EdgeInsets.all(24.0),
         child: SizedBox(
@@ -59,17 +59,20 @@ class OnboardingBottomBar extends StatelessWidget {
           ),
         ),
       );
-    } else {
+    } else {   // 마지막 페이지가 아닐 경우
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // 3가지 기능을 가진 자식
           children: [
+            // 마지막 페이지로 넘어가는 건너뛰기 텍스트 버튼
             TextButton(
               onPressed: onSkip,
               child: const Text(
                   "건너뛰기", style: TextStyle(color: AppColors.gray300)),
             ),
+            // 현재(primaryColor)와 전체 인덱스(gray100)를 표시하는 동그라미들
             Row(
               children: List.generate(totalPageCount, (index) {
                 return Container(
@@ -84,6 +87,7 @@ class OnboardingBottomBar extends StatelessWidget {
                 );
               }),
             ),
+            // 다음 페이지로 넘어가는 다음 텍스트 버튼
             TextButton(
               onPressed: onNext,
               child: const Text(

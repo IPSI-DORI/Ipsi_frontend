@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/app_dropdown.dart';
+import 'package:ipsi_frontend/core/components/button/app_button.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/components/app_text_field.dart';
 
@@ -54,7 +55,17 @@ class _SignupScreenState extends State<SignupScreen> {
                 }, hintText: '',
               ),
             ),
-
+            
+            // 커스텀 버튼
+            AppButton(
+              text: '다음',
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignupScreen())
+                );
+              },
+            )
           ],
         ),
       ),
