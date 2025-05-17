@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: '입시도리',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      initialRoute: AppRoutes.auth,
+      initialRoute: AppRoutes.chatbot,
       routes: AppRoutes.routes,
     );
   }
