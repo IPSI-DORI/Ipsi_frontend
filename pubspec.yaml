@@ -21,9 +21,13 @@ flutter:
 
   assets:
     - assets/images/home_click.png
+    - assets/images/home.png
     - assets/images/chatbot.png
+    - assets/images/chatbot_click.png
     - assets/images/curriculum.png
+    - assets/images/curriculum_click.png
     - assets/images/mypage.png
+    - assets/images/mypage_click.png
 
   fonts:
     - family: Pretendard
