@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ipsi_frontend/features/chatbot/views/chat_screen.dart';
 import 'package:ipsi_frontend/features/curriculum/views/curriculum_screen.dart';
 import '../../../core/widgets/custom_bottom_navigation.dart';
 
@@ -14,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _screens = [
     Center(child: Text('홈 화면')),
-    Center(child: Text('챗봇 화면')),
+    ChatScreen(),
     CurriculumScreen(),
     Center(child: Text('마이페이지 화면')),
   ];
