@@ -282,6 +282,11 @@ class _OnboardingViewState extends State<CurriculumScreen> {
   // 성적 입력 항목
   final List<String> _scoreFields = ['원점수', '등급', '백분위'];
 
+  // 등급 선택 옵션
+  final List<String> _gradeOptions = [
+    '1등급', '2등급', '3등급', '4등급', '5등급', '6등급', '7등급', '8등급', '9등급'
+  ];
+
   Widget _buildExamScoresPage(BuildContext context, CurriculumViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -314,32 +319,33 @@ class _OnboardingViewState extends State<CurriculumScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            ..._scoreFields.map((field) => _buildScoreInputField(
-              field,
-              viewModel.getExamScore(field),
-              (value) => viewModel.setExamScore(field, value),
-            )),
+            ..._scoreFields.map((field) {
+              if (field == '등급') {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: _buildDropdown(
+                    context,
+                    0,
+                    _gradeOptions,
+                    viewModel.getExamScore(field),
+                    (value) => viewModel.setExamScore(field, value),
+                    '등급을 선택해주세요',
+                  ),
+                );
+              } else {
+                return _buildScoreInputField(
+                  field,
+                  viewModel.getExamScore(field),
+                  (value) => viewModel.setExamScore(field, value),
+                );
+              }
+            }),
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.teal.shade50,
                 borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.info_outline, color: Colors.teal.shade700),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      '현재 성적을 입력하시면 목표 달성을 위한 맞춤형 커리큘럼을 제공해 드립니다.',
-                      style: TextStyle(
-                        color: Colors.teal.shade700,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ),
           ],
@@ -416,30 +422,6 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                   ],
                 );
               }).toList(),
-              const Text(
-                "추가 요청사항 (선택)",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: TextField(
-                  maxLines: 3,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(16),
-                    border: InputBorder.none,
-                    hintText: '선생님께 전달할 추가 요청사항이 있으면 작성해주세요',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                  onChanged: (value) => viewModel.setAdditionalRequest(value),
-                ),
-              ),
               const SizedBox(height: 20),
             ],
           ),
