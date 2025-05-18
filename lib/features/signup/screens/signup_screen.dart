@@ -3,6 +3,7 @@ import 'package:ipsi_frontend/core/components/app_dropdown.dart';
 import 'package:ipsi_frontend/core/components/button/app_button.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/components/app_text_field.dart';
+import 'package:ipsi_frontend/features/home/screens/home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -62,7 +63,7 @@ class _SignupScreenState extends State<SignupScreen> {
               onPressed: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SignupScreen())
+                    MaterialPageRoute(builder: (context) => const HomeScreen())
                 );
               },
             )
