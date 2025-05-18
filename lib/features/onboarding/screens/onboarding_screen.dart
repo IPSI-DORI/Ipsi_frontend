@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/constants/app_colors.dart';
+import 'package:ipsi_frontend/core/components/bottombar/onboarding_bottombar.dart';
 import 'package:ipsi_frontend/features/signup/screens/signup_screen.dart';
+import '../../../core/constants/app_colors.dart';
 import '../../home/screens/home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  // 코드로도 스와이프 되도록 하는 컨트롤러
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 
@@ -133,7 +135,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               itemBuilder: (_, index) => _buildPage(messages[index]),
             ),
           ),
-          _buildBottomBar(),
+
+          // 온보딩 바텀바
+          OnboardingBottomBar(
+              isLastPage: _currentIndex == messages.length - 1,
+              currentIndex: _currentIndex, // _ : private 변수명일 때 사용
+              totalPageCount: messages.length,
+              onSkip: () {
+                _pageController.animateToPage(
+                    messages.length - 1,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.easeInOut
+                );
+              },
+              onNext: () {
+                _pageController.nextPage(
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.easeInOut
+                );
+              },
+              onkakako: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignupScreen())
+                );
+              }
+          )
         ],
       ),
     );
