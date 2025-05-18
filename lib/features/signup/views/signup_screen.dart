@@ -82,6 +82,20 @@ class _SignupScreenState extends State<SignupScreen> {
     _validateStep();
   }
 
+  void _handleBackPressed() {
+    if (_currentStep > 0) {
+      setState(() {
+        _currentStep--;
+        _pageController.previousPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+    } else {
+      Navigator.pop(context);
+    }
+  }
+
   // 현재 학교 선택
   void onSchoolChanged(String? value) {
     setState(() {
@@ -199,7 +213,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SignupHeader(currentStep: _currentStep),
+                      SignupHeader(
+                        currentStep: _currentStep,
+                        onBack: _handleBackPressed,
+                      ),
                       if (_currentStep == 0)
                         SignupStep1Info(
                             nicknameController: _nicknameController,
@@ -264,7 +281,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (context) => const SignupResultScreen(nickname: 'nickname')),
+                              builder: (context) => const SignupResultScreen(
+                                  nickname: 'nickname')),
                         )
                       }
                   }

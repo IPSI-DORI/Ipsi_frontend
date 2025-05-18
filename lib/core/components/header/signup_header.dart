@@ -5,13 +5,11 @@ import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 
 class SignupHeader extends StatelessWidget {
   // 속성 정의
-  final int currentStep; // 현재 몇 번째인지
+  final int currentStep;
+  final VoidCallback? onBack; // 현재 몇 번째인지
 
   // 생성자 정의
-  SignupHeader({
-    super.key,
-    required this.currentStep,
-  });
+  SignupHeader({super.key, required this.currentStep, this.onBack});
 
   // ui
   @override
@@ -41,22 +39,14 @@ class SignupHeader extends StatelessWidget {
           // 이전 버튼
           Align(
               alignment: Alignment.centerLeft,
-              child: Row(mainAxisSize: MainAxisSize.min, children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/images/icon/back.png',
-                        width: 24,
-                        height: 24,
-                      ),
-                    ],
-                  ),
-                )
-              ])),
+              child: GestureDetector(
+                onTap: onBack ?? () => Navigator.pop(context),
+                child: Image.asset(
+                  'assets/images/icon/back.png',
+                  width: 24,
+                  height: 24,
+                ),
+              )),
         ]));
   }
 }

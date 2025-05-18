@@ -74,7 +74,7 @@ class _HomeMainViewState extends State<HomeMainView> {
                 children: [
                   Image.asset(isTodoSelected
                       ? "assets/images/characters/morrie.png"
-                      : "assets/images/characters/raggy.png",
+                      : "assets/images/characters/morrie.png",
                     width: 140,
                     height: 140,
                   ),
