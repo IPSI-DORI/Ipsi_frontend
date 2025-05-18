@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/bottombar/onboarding_bottombar.dart';
-import 'package:ipsi_frontend/core/constants/app_colors.dart';
-import 'package:ipsi_frontend/features/home/screens/home_screen.dart';
 import 'package:ipsi_frontend/features/signup/screens/signup_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
