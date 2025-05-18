@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/bottombar/onboarding_bottombar.dart';
 import 'package:ipsi_frontend/features/signup/screens/signup_screen.dart';
+import '../../../core/constants/app_colors.dart';
 import '../../home/screens/home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -53,8 +54,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-<<<<<<< HEAD
-=======
   // 바텀바
   Widget _buildBottomBar() {
     if (_currentIndex == messages.length - 1) {
@@ -123,7 +122,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
->>>>>>> dev
   @override
   Widget build(BuildContext context) {
     return Scaffold(
