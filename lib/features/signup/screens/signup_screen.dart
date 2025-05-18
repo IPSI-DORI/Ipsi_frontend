@@ -55,7 +55,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 }, hintText: '',
               ),
             ),
-<<<<<<< HEAD
             
             // 커스텀 버튼
             AppButton(
@@ -67,8 +66,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 );
               },
             )
-=======
->>>>>>> dev
           ],
         ),
       ),
