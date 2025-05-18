@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import './core/widgets/custom_bottom_navigation.dart';
+import './features/home/screens/home_screen.dart';
+import './features/chatbot/views/chat_screen.dart';
+import 'features/curriculum/views/curriculum_screen.dart';
+import './features/mypage/screens/mypage_screen.dart';
+
+class MainScaffold extends StatefulWidget {
+  const MainScaffold({super.key});
+
+  @override
+  State<MainScaffold> createState() => _MainScaffoldState();
+}
+
+class _MainScaffoldState extends State<MainScaffold> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    HomeScreen(),
+    ChatScreen(),
+    CurriculumScreen(),
+    MyPageScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
+      bottomNavigationBar: CustomBottomNavigation(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
+    );
+  }
+}

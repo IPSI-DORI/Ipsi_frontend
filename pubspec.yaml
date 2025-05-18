@@ -15,6 +15,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  intl: ^0.20.2
+  provider: ^6.1.5
+
 
 flutter:
   uses-material-design: true
@@ -40,6 +43,7 @@ flutter:
     - assets/images/icon/glass_chat.png
     - assets/images/icon/glass_calendar.png
     - assets/images/icon/kakao.png
+    - assets/images/icon/bot_avatar.png
 
 
   fonts:

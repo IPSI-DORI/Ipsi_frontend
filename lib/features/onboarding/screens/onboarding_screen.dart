@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/bottombar/onboarding_bottombar.dart';
 import 'package:ipsi_frontend/features/signup/screens/signup_screen.dart';
+import '../../home/screens/home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -52,6 +53,77 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+<<<<<<< HEAD
+=======
+  // 바텀바
+  Widget _buildBottomBar() {
+    if (_currentIndex == messages.length - 1) {
+      return Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: SizedBox(
+          width: double.infinity,
+          
+          // 카카오톡 버튼
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFFFE812), // 배경색
+              foregroundColor: AppColors.gray800,// 글자색
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            ),
+            // 수평 방향으로 위젯 나란히 배치
+            child: Row(
+              // 수평 방향에서 자식들을 가운데 정렬
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                    'assets/images/icon/kakao.png',
+                    width: 24,
+                    height: 24),
+                const SizedBox(width: 8), // 간격
+                Text("카카오톡으로 시작하기"),
+              ]
+            )
+
+          ),
+        ),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("건너뛰기", style: TextStyle(color: AppColors.gray300)),
+            Row(
+              children: List.generate(messages.length, (index) {
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _currentIndex == index ? Colors.teal : AppColors.gray100,
+                  ),
+                );
+              }),
+            ),
+            TextButton(
+              onPressed: () {
+                _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+              },
+              child: const Text("다음", style: TextStyle(color: AppColors.primary)),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+>>>>>>> dev
   @override
   Widget build(BuildContext context) {
     return Scaffold(
