@@ -79,8 +79,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 Image.asset(
                     'assets/images/icon/kakao.png',
-                    width: 24,
-                    height: 24),
+                    width: AppSizes.iconM,
+                    height: AppSizes.iconM),
                 const SizedBox(width: 8), // 간격
                 Text("카카오톡으로 시작하기"),
               ]

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 
+// 앱 텍스트 테마
 final TextTheme appTextTheme = TextTheme(
   // Title
   titleLarge: TextStyle( // ex. Title 1 Bold (20/170)
@@ -66,4 +67,13 @@ final TextTheme appTextTheme = TextTheme(
     height: 1.2,
     color: AppColors.gray800,
   ),
+);
+
+// 커스텀 텍스트 테마
+final primaryTitleLarge = TextStyle(
+  fontFamily: 'Pretendard',
+  fontSize: 20,
+  fontWeight: FontWeight.w700,
+  height: 1.7,
+  color: AppColors.primary,
 );

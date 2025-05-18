@@ -2,7 +2,9 @@
 
 class AppSizes {
   // Padding
-  static const double paddingXS = 4.0;
+  static const double padding3XS = 4.0;
+  static const double padding2XS = 8.0;
+  static const double paddingXS = 10.0;
   static const double paddingS = 12.0;
   static const double paddingM = 16.0;
   static const double paddingL = 20.0;
