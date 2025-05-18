@@ -6,6 +6,7 @@ class CurriculumViewModel extends ChangeNotifier {
   List<String> selectedSubjects = List.filled(4, '');
   List<String> selectedDetailSubjects = List.filled(4, '');
   List<String> selectedExamType = List.filled(4, '');
+  List<String> selectedLectureIndex = List.filled(4, '');
 
   // 시간 관련
   String selectedTimeSlot = '';
@@ -35,6 +36,11 @@ class CurriculumViewModel extends ChangeNotifier {
 
   void setDetailSubject(int page, String detailSubject) {
     selectedDetailSubjects[page] = detailSubject;
+    notifyListeners();
+  }
+
+  void setSelectedLecture(int page) {
+    _currentPage = page;
     notifyListeners();
   }
 
@@ -89,6 +95,8 @@ class CurriculumViewModel extends ChangeNotifier {
               selectedExamTypeValue.isNotEmpty;
     case 3:
       return surveyAnswers.isNotEmpty;
+    case 4: 
+      return selectedLectureIndex.isNotEmpty;
     default:
       return true;
   }

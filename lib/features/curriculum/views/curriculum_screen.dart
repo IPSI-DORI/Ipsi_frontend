@@ -36,7 +36,7 @@ class _OnboardingViewState extends State<CurriculumScreen> {
     },
   ];
   
-  // 시간대 목록 (예시)
+  // 시간대 목록
   final List<String> _timeSlots = [
     '오전 9시-10시',
     '오전 10시-11시',
@@ -71,7 +71,7 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                     Expanded(
                     child: PageView.builder(
                       controller: _pageController,
-                      itemCount: 4, // 1: 과목, 2: 공부 시간/요일, 3: 모의고사/수능 성적, 4: 설문조사
+                      itemCount: 5, 
                       physics: const NeverScrollableScrollPhysics(),
                       onPageChanged: viewModel.setCurrentPage,
                       itemBuilder: (context, index) {
@@ -82,8 +82,9 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                       } else if (index == 2) {
                         return _buildExamScoresPage(context, viewModel);
                       } else if (index == 3) {
-                        // TODO: 학습 관련 설문조사 페이지 위젯 구현 필요
                         return _buildSurveyPage(context, viewModel);
+                      } else if (index == 4) {
+                        return _buildLecturePage(context, viewModel);
                       } else {
                         return const SizedBox.shrink();
                       }
@@ -115,6 +116,8 @@ class _OnboardingViewState extends State<CurriculumScreen> {
       case 3:
       headerText = '간단한 설문조사에 응답해주세요';
       break;
+      case 4: 
+      headerText = '듣고싶은 맞춤 강의를 선택해주세요';
       default:
       headerText = '';
     }
@@ -354,7 +357,7 @@ class _OnboardingViewState extends State<CurriculumScreen> {
     );
   }
   
-  // 설문조사 질문 목록 (예시)
+  // 설문조사 질문 목록
     final List<Map<String, dynamic>> _surveyQuestions = [
       {
         'question': '가장 선호하는 학습 방식은?',
@@ -426,6 +429,125 @@ class _OnboardingViewState extends State<CurriculumScreen> {
             ],
           ),
         ),
+      );
+    }
+
+    final List<Map<String, dynamic>> _lectureContent = [
+      {
+        'title': '[2025 수능완성] 수학 + 미적분 - 남치열 미적분(실전편)',
+        'price': '무료',
+        'name': '남치열',
+        'time': '65분(5강)'
+      },
+      {
+        'title': '2026 현우진의 드릴 - 미적분(선택)',
+        'price': '유료',
+        'name': '현우진',
+        'time': '60분(10강)'
+      },
+      {
+        'title': '[미적분] 2026 김기현의 Connection',
+        'price': '유료',
+        'name': '김기현',
+        'time': '60분(19강)'
+      }
+    ];
+
+    Widget _buildLecturePage(BuildContext context, CurriculumViewModel viewModel) {
+      return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: SingleChildScrollView(
+        child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ..._lectureContent.asMap().entries.map((entry) {
+          final int idx = entry.key;
+          final lectureData = entry.value;
+          final bool isSelected = viewModel.selectedLectureIndex == idx;
+          return GestureDetector(
+            onTap: () {
+            viewModel.setSelectedLecture(idx);
+            setState(() {}); // UI 갱신
+            },
+            child: Card(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: isSelected
+                ? BorderSide(color: Colors.teal, width: 2)
+                : BorderSide.none,
+            ),
+            color: isSelected ? Colors.teal.shade50 : null,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                lectureData['title'],
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                children: [
+                  Chip(
+                  label: Text(lectureData['price']),
+                  backgroundColor: lectureData['price'] == '무료'
+                    ? Colors.teal.shade100
+                    : Colors.orange.shade100,
+                  ),
+                  const SizedBox(width: 8),
+                  Text('강사: ${lectureData['name']}'),
+                  const SizedBox(width: 8),
+                  Text('시간: ${lectureData['time']}'),
+                ],
+                ),
+                const SizedBox(height: 12),
+                Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                  // 상세보기 동작 구현해야함
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                    title: Text(lectureData['title']),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      Text('강사: ${lectureData['name']}'),
+                      Text('가격: ${lectureData['price']}'),
+                      Text('시간: ${lectureData['time']}'),
+                      const SizedBox(height: 12),
+                      const Text('상세 정보가 여기에 표시됩니다.'),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('닫기'),
+                      ),
+                    ],
+                    ),
+                  );
+                  },
+                  child: const Text('상세보기'),
+                ),
+                ),
+              ],
+              ),
+            ),
+            ),
+          );
+          }).toList(),
+        ],
+        ),
+      ),
       );
     }
 
