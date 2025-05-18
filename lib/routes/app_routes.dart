@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/features/splash/screens/splash_screen.dart';
 import '../features/chatbot/views/chat_screen.dart';
-import '../features/curriculum/screens/curriculum_screen.dart';
+import '../features/curriculum/views/curriculum_screen.dart';
 import '../features/mypage/screens/mypage_screen.dart';
 
 class AppRoutes {
