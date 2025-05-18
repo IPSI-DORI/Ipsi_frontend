@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
+import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 
 /// 커스텀 인풋
 /// - [hintText] : 입력 필트에서 표시되는 힌트 텍스트 (= placeholder)
@@ -47,8 +48,8 @@ class AppTextField extends StatelessWidget {
 
         // 여백
         contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12
+            horizontal: AppSizes.paddingM,
+            vertical: AppSizes.paddingS
         ),
 
         // 테두리색 (기본)

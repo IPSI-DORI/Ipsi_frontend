@@ -24,15 +24,27 @@ class AppButton extends StatelessWidget {
     this.enabled = true   // 기본: ture
   });
 
-  // 사이즈별로 반환하는 getter
+  // 사이즈별로 높이 반환하는 getter
   double get _buttonHeight {
     switch (size) {
       case AppButtonSize.large:
-        return 56;
+        return 58;
       case AppButtonSize.medium:
-        return 52;
-      case AppButtonSize.small:
         return 44;
+      case AppButtonSize.small:
+        return 30;
+    }
+  }
+
+  // 사이즈별로 너비 반환하는 getter
+  double get _buttonWidth {
+    switch (size) {
+      case AppButtonSize.large:
+        return 350;
+      case AppButtonSize.medium:
+        return 0.6;
+      case AppButtonSize.small:
+        return 0.3;
     }
   }
 
@@ -40,7 +52,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,   // 너비: 꽉 채우기
+      width: _buttonWidth,   // 너비: 꽉 채우기
       height: _buttonHeight,   // 높이: 사이즈에 따라 조절
       child: ElevatedButton(
           onPressed: enabled ? onPressed : null,
