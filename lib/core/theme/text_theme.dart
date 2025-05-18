@@ -9,14 +9,12 @@ final TextTheme appTextTheme = TextTheme(
     fontSize: 20,
     fontWeight: FontWeight.w700,
     height: 1.7,
-    color: AppColors.gray800,
   ),
   titleMedium: TextStyle( // ex. Title 2 Bold (16/150)
     fontFamily: 'Pretendard',
     fontSize: 16,
     fontWeight: FontWeight.w700,
     height: 1.5,
-    color: AppColors.gray800,
   ),
 
   // Body
@@ -25,7 +23,6 @@ final TextTheme appTextTheme = TextTheme(
     fontSize: 16,
     fontWeight: FontWeight.w500,
     height: 1.5,
-    color: AppColors.gray800,
   ),
   bodyMedium: TextStyle(
     fontFamily: 'Pretendard',
@@ -33,14 +30,12 @@ final TextTheme appTextTheme = TextTheme(
     fontWeight: FontWeight.w500,
     height: 1.7,
     letterSpacing: -0.25,
-    color: AppColors.gray800,
   ),
   bodySmall: TextStyle(
     fontFamily: 'Pretendard',
     fontSize: 12,
     fontWeight: FontWeight.w400,
     height: 1.5,
-    color: AppColors.gray800,
   ),
 
   // Button
@@ -49,14 +44,12 @@ final TextTheme appTextTheme = TextTheme(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     height: 1.4,
-    color: AppColors.gray800,
   ),
   labelMedium: TextStyle(
     fontFamily: 'Pretendard',
-    fontSize: 10,
-    fontWeight: FontWeight.w600,
+    fontSize: 11,
+    fontWeight: FontWeight.w400,
     height: 1.5,
-    color: AppColors.gray800,
   ),
 
   // Caption, Footnote
@@ -65,7 +58,6 @@ final TextTheme appTextTheme = TextTheme(
     fontSize: 11,
     fontWeight: FontWeight.w500,
     height: 1.2,
-    color: AppColors.gray800,
   ),
 );
 
@@ -73,6 +65,14 @@ final TextTheme appTextTheme = TextTheme(
 final primaryTitleLarge = TextStyle(
   fontFamily: 'Pretendard',
   fontSize: 20,
+  fontWeight: FontWeight.w700,
+  height: 1.7,
+  color: AppColors.primary,
+);
+
+final primaryLogo = TextStyle(
+  fontFamily: 'Pretendard',
+  fontSize: 24,
   fontWeight: FontWeight.w700,
   height: 1.7,
   color: AppColors.primary,
