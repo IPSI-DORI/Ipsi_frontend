@@ -1,7 +1,7 @@
 // 네비게이션 관리 (GoRouter, named routes 등)
 
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/features/splash/screens/splash_screen.dart';
+import 'package:ipsi_frontend/features/splash/views/splash_screen.dart';
 import '../features/chatbot/views/chat_screen.dart';
 import '../features/curriculum/views/curriculum_screen.dart';
 import '../features/mypage/screens/mypage_screen.dart';

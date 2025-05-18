@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/app_dropdown.dart';
 import 'package:ipsi_frontend/core/components/button/app_button.dart';
-import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/components/app_text_field.dart';
-import 'package:ipsi_frontend/features/home/screens/home_screen.dart';
+import 'package:ipsi_frontend/features/home/views/home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
