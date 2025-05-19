@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
+import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 
 class OnboardingBottomBar extends StatelessWidget {
 
@@ -37,11 +38,11 @@ class OnboardingBottomBar extends StatelessWidget {
           child: ElevatedButton(
               onPressed: onkakako,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFFE812), // 배경색
+                backgroundColor: AppColors.yellow, // 배경색
                 foregroundColor: AppColors.gray800, // 글자색
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusM)),
               ),
               // 수평 방향으로 위젯 나란히 배치
               child: Row(
@@ -81,8 +82,7 @@ class OnboardingBottomBar extends StatelessWidget {
                   height: 8,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: currentIndex == index ? Colors.teal : AppColors
-                        .gray100,
+                    color: currentIndex == index ? AppColors.primary : AppColors.gray100,
                   ),
                 );
               }),

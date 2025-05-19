@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/bottombar/onboarding_bottombar.dart';
-import 'package:ipsi_frontend/features/signup/screens/signup_screen.dart';
+import 'package:ipsi_frontend/core/constants/app_sizes.dart';
+import 'package:ipsi_frontend/features/signup/views/signup_screen.dart';
 import '../../../core/constants/app_colors.dart';
-import '../../home/screens/home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -47,7 +47,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: Text(
             text,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            style: const TextStyle(fontSize: AppSizes.font16, fontWeight: FontWeight.w400),
           ),
         ),
       ],
@@ -58,20 +58,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget _buildBottomBar() {
     if (_currentIndex == messages.length - 1) {
       return Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(AppSizes.paddingXL),
         child: SizedBox(
           width: double.infinity,
           
           // 카카오톡 버튼
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SignupScreen()));
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFFFE812), // 배경색
+              backgroundColor: AppColors.yellow, // 배경색
               foregroundColor: AppColors.gray800,// 글자색
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizes.radiusM)),
             ),
             // 수평 방향으로 위젯 나란히 배치
             child: Row(
@@ -80,8 +79,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 Image.asset(
                     'assets/images/icon/kakao.png',
-                    width: 24,
-                    height: 24),
+                    width: AppSizes.iconM,
+                    height: AppSizes.iconM),
                 const SizedBox(width: 8), // 간격
                 Text("카카오톡으로 시작하기"),
               ]
@@ -92,7 +91,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
     } else {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingL, vertical: AppSizes.paddingM),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -100,7 +99,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Row(
               children: List.generate(messages.length, (index) {
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
                   width: 8,
                   height: 8,
                   decoration: BoxDecoration(
