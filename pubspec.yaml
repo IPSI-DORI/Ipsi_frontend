@@ -32,6 +32,7 @@ flutter:
     - assets/images/bottombar/mypage.png
     - assets/images/bottombar/mypage_click.png
     - assets/images/characters/raggy.png
+    - assets/images/characters/sad_morrie.png
     - assets/images/characters/morrie.png
     - assets/images/characters/dori.png
     - assets/images/characters/norrie.png

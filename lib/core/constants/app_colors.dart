@@ -6,7 +6,7 @@ class AppColors {
   // 주요 컬러
   static const Color primary = Color(0xFF36B2A3);
   static const Color primary2 = Color(0xFFACE6E0);
-  static const Color primar3 = Color(0xFFEEFAF9);
+  static const Color primary3 = Color(0xFFEEFAF9);
 
   // 그레이 컬러
   static const Color gray800 = Color(0xFF26292D);

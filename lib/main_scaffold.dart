@@ -3,7 +3,7 @@ import 'package:ipsi_frontend/features/home/views/home_screen.dart';
 import './core/widgets/custom_bottom_navigation.dart';
 import './features/chatbot/views/chat_screen.dart';
 import 'features/curriculum/views/curriculum_screen.dart';
-import './features/mypage/screens/mypage_screen.dart';
+import './features/mypage/views//mypage_screen.dart';
 
 class MainScaffold extends StatefulWidget {
   const MainScaffold({super.key});
