@@ -73,8 +73,8 @@ class _HomeMainViewState extends State<HomeMainView> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(isTodoSelected
-                      ? "assets/images/characters/morrie.png"
-                      : "assets/images/characters/morrie.png",
+                      ? "assets/images/characters/sad_morrie.png"
+                      : "assets/images/characters/sad_morrie.png",
                     width: 140,
                     height: 140,
                   ),
