@@ -679,11 +679,11 @@ class _OnboardingViewState extends State<CurriculumScreen> {
             }
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: viewModel.selectedLectureIndex != null ? Colors.blue : Colors.grey,
+            backgroundColor: viewModel.selectedLectureIndex != null ? Colors.teal : Colors.grey,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
           child: Text(

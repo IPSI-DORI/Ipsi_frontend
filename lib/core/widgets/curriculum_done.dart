@@ -17,7 +17,7 @@ class CurriculumDone extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    'assets/images/icon/done_morrie.png', 
+                    'assets/images/icon/done_morrie.png',
                     width: 180,
                     height: 180,
                     fit: BoxFit.contain,
@@ -37,12 +37,15 @@ class CurriculumDone extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // 투두리스트 확인하기 버튼 동작 추가
+                    // 예시: 투두리스트 페이지로 이동
+                    Navigator.of(context).pushNamed('/todoList');
                   },
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 18),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   child: const Text(
