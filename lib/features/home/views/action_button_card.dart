@@ -23,22 +23,27 @@ class ActionButtonCard extends StatelessWidget {
           onTap: onPressed,
           child: Container(
             padding: const EdgeInsets.all(AppSizes.paddingM),
-            margin: const EdgeInsets.symmetric(horizontal: AppSizes.padding2XS),
+            margin: const EdgeInsets.symmetric(horizontal: AppSizes.paddingXS),
             decoration: BoxDecoration(
               color: AppColors.gray0,
               borderRadius: BorderRadius.circular(AppSizes.radiusM),
             ),
             child: Row(
               children: [
+                Flexible(
+                  child:
                 Text(
                   title,
                   style: const TextStyle(fontSize: 14),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
-                SizedBox(width: AppSizes.paddingXL),
+                ),
+                SizedBox(width: AppSizes.paddingS),
                 Image.asset(
                   imgPath,
-                  width: AppSizes.iconL,
-                  height: AppSizes.iconL,
+                  width: AppSizes.iconM,
+                  height: AppSizes.iconM,
                 ),
               ],
             ),
