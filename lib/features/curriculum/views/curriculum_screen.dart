@@ -1,11 +1,15 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/widgets/curriculum_done.dart';
 import '../viewmodels/curriculum_view_model.dart';
 import '../../../core/widgets/lecture_detail_modal.dart';
 
 class CurriculumScreen extends StatefulWidget {
-  const CurriculumScreen({super.key});
+  final VoidCallback? onNext;
+  final VoidCallback? onRestart;
+
+  const CurriculumScreen({super.key, this.onNext, this.onRestart});
 
   @override
   State<CurriculumScreen> createState() => _OnboardingViewState();
@@ -213,7 +217,9 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                       },
                     ),
                   ),
-                  _buildNextButton(viewModel),
+                  viewModel.currentPage < 4
+                      ? _buildNextButton(viewModel)
+                      : _buildLastButton(viewModel),
                 ],
               ),
             ),
@@ -448,13 +454,36 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  _buildDropdown(
-                    context,
-                    0,
-                    options,
-                    viewModel.getSurveyAnswer(question),
-                    (value) => viewModel.setSurveyAnswer(question, value),
-                    '한 가지를 선택해주세요',
+                  DropdownButtonFormField<String>(
+                    value: viewModel.getSurveyAnswer(question).isNotEmpty
+                        ? viewModel.getSurveyAnswer(question)
+                        : null,
+                    items: options
+                        .map((item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width - 100,
+                                child: Text(
+                                  item,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    onChanged: (value) {
+                      if (value != null) {
+                        viewModel.setSurveyAnswer(question, value);
+                      }
+                    },
+                    decoration: InputDecoration(
+                      hintText: '한 가지를 선택해주세요',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    ),
+                    // dropdownMaxHeight: 200, // Flutter 3.16+ only
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -564,19 +593,34 @@ class _OnboardingViewState extends State<CurriculumScreen> {
       spacing: 8.0,
       children: _days.map((day) {
         final bool isSelected = viewModel.selectedDays.contains(day);
-        return ChoiceChip(
-          label: Text(day),
-          selected: isSelected,
-          selectedColor: Colors.teal.shade200,
-          onSelected: (selected) {
+        return InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: () {
             setState(() {
-              if (selected) {
-                viewModel.addDay(day);
+              if (isSelected) {
+          viewModel.removeDay(day);
               } else {
-                viewModel.removeDay(day);
+          viewModel.addDay(day);
               }
             });
           },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            decoration: BoxDecoration(
+              color: isSelected ? Colors.teal.shade200 : Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(20),
+              border: isSelected
+            ? Border.all(color: Colors.teal, width: 2)
+            : Border.all(color: Colors.transparent),
+            ),
+            child: Text(
+              day,
+              style: TextStyle(
+          color: isSelected ? Colors.white : Colors.black87,
+          fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         );
       }).toList(),
     );
@@ -614,4 +658,44 @@ class _OnboardingViewState extends State<CurriculumScreen> {
       ),
     );
   }
+
+  Widget _buildLastButton(CurriculumViewModel viewModel) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: () {
+            if (viewModel.selectedLectureIndex != null) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const CurriculumDone(),
+                ),
+              );
+              widget.onNext?.call();
+            } else {
+              Navigator.of(context).pop();
+              widget.onRestart?.call();
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: viewModel.selectedLectureIndex != null ? Colors.blue : Colors.grey,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          child: Text(
+            viewModel.selectedLectureIndex != null ? '다음' : '다시 만들래요',
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
 }
+
+
+
+
