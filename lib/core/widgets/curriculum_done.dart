@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/todolist/screens/todolist_screen.dart';
 
 class CurriculumDone extends StatelessWidget {
   const CurriculumDone({Key? key}) : super(key: key);
@@ -36,10 +37,14 @@ class CurriculumDone extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // 예시: 투두리스트 페이지로 이동
-                    Navigator.of(context).pushNamed('/todoList');
-                  },
+                    onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) => TodolistScreen(),
+                      ),
+                    );
+                    },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.teal,
                     foregroundColor: Colors.white,

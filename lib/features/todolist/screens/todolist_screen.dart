@@ -3,12 +3,12 @@ import '../widgets/calendar_widget.dart';
 import '../widgets/schedule_list_widget.dart';
 import '../viewmodels/todolist_view_model.dart';
 
-class CurriculumScreen extends StatefulWidget {
+class TodolistScreen extends StatefulWidget {
   @override
   _CurriculumScreenState createState() => _CurriculumScreenState();
 }
 
-class _CurriculumScreenState extends State<CurriculumScreen> {
+class _CurriculumScreenState extends State<TodolistScreen> {
   final viewModel = CurriculumViewModel();
 
   @override
