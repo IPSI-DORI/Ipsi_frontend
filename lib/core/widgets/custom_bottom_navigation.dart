@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ipsi_frontend/core/constants/app_colors.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
   final int selectedIndex;
@@ -23,8 +24,8 @@ class CustomBottomNavigation extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       currentIndex: selectedIndex,
       onTap: onItemTapped,
-      selectedItemColor: const Color(0xFF4BC7A6),
-      unselectedItemColor: const Color(0xFFBDBDBD),
+      selectedItemColor: AppColors.primary,
+      unselectedItemColor: AppColors.gray300,
       showUnselectedLabels: true,
       items: items.asMap().entries.map((entry) {
         final i = entry.key;
