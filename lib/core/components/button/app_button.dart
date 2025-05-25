@@ -18,7 +18,7 @@ class AppButton extends StatelessWidget {
   // 생성자 정의
   const AppButton ({
     super.key,
-    this.size = AppButtonSize.large,   // 기본: large
+    required this.size,   // 기본: large
     required this.text,
     this.onPressed,
     this.enabled = true   // 기본: ture
@@ -30,7 +30,7 @@ class AppButton extends StatelessWidget {
       case AppButtonSize.large:
         return 58;
       case AppButtonSize.medium:
-        return 44;
+        return 48;
       case AppButtonSize.small:
         return 30;
     }
@@ -42,9 +42,9 @@ class AppButton extends StatelessWidget {
       case AppButtonSize.large:
         return 350;
       case AppButtonSize.medium:
-        return 0.6;
+        return 350;
       case AppButtonSize.small:
-        return 0.3;
+        return 318;
     }
   }
 

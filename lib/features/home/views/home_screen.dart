@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/features/chatbot/views/chat_screen.dart';
+import 'package:ipsi_frontend/features/curriculum/views/curriculum_default_screen.dart';
 import 'package:ipsi_frontend/features/curriculum/views/curriculum_screen.dart';
 import 'package:ipsi_frontend/features/home/views/home_main_view.dart';
 import 'package:ipsi_frontend/features/mypage/views/mypage_screen.dart';
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     HomeMainView(),
     ChatScreen(),
-    CurriculumScreen(),
+    CurriculumDefaultScreen(),
     MyPageScreen()
   ];
 

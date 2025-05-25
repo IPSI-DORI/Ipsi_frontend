@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ipsi_frontend/features/curriculum/views/curriculum_default_screen.dart';
 import 'package:ipsi_frontend/features/home/views/home_screen.dart';
 import './core/widgets/custom_bottom_navigation.dart';
 import './features/chatbot/views/chat_screen.dart';
@@ -18,7 +19,7 @@ class _MainScaffoldState extends State<MainScaffold> {
   final List<Widget> _pages = [
     HomeScreen(),
     ChatScreen(),
-    CurriculumScreen(),
+    CurriculumDefaultScreen(),
     MyPageScreen(),
   ];
 

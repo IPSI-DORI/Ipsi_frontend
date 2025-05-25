@@ -33,14 +33,17 @@ flutter:
     - assets/images/bottombar/mypage_click.png
     - assets/images/characters/raggy.png
     - assets/images/characters/sad_morrie.png
+    - assets/images/characters/level1_morrie.png
     - assets/images/characters/morrie.png
     - assets/images/characters/dori.png
     - assets/images/icon/done_morrie.png
     - assets/images/characters/norrie.png
+    - assets/images/characters/teacher.png
     - assets/images/icon/alert.png
     - assets/images/icon/back.png
     - assets/images/icon/cancel.png
     - assets/images/icon/next.png
+    - assets/images/icon/gray300_next.png
     - assets/images/icon/search.png
     - assets/images/icon/glass_chat.png
     - assets/images/icon/glass_calendar.png

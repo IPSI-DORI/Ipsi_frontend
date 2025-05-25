@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import '../../features/chatbot/models/message_model.dart';
 
 class MessageBubble extends StatelessWidget {
@@ -10,7 +11,7 @@ class MessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final timeString = DateFormat('a h:mm').format(message.timestamp);
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -28,7 +29,6 @@ class MessageBubble extends StatelessWidget {
                 backgroundImage: AssetImage(message.profileImage!),
               ),
             ),
-            
           if (message.type == MessageType.bot && message.profileImage == null)
             Padding(
               padding: const EdgeInsets.only(right: 8),
@@ -38,7 +38,6 @@ class MessageBubble extends StatelessWidget {
                 child: const Icon(Icons.chat, color: Colors.white, size: 16),
               ),
             ),
-            
           Column(
             crossAxisAlignment: message.type == MessageType.user
                 ? CrossAxisAlignment.end
@@ -48,11 +47,12 @@ class MessageBubble extends StatelessWidget {
                 constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width * 0.7,
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
                   color: message.type == MessageType.user
-                      ? Colors.teal[400]
-                      : Colors.grey[200],
+                      ? AppColors.primary
+                      : AppColors.gray0,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(

@@ -71,6 +71,7 @@ class SignupResultScreen extends StatelessWidget {
                   height: 56,
                   child: AppButton(
                       text: '시작하기',
+                      size: AppButtonSize.large,
                       onPressed: () {
                         Navigator.push(
                             context,
