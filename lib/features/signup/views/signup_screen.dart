@@ -191,6 +191,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(children: [
           Expanded(
@@ -267,6 +268,7 @@ class _SignupScreenState extends State<SignupScreen> {
         padding: const EdgeInsets.all(24.0),
         child: AppButton(
           text: _currentStep == 3 ? "완료" : '다음',
+          size: AppButtonSize.large,
           enabled: _isStepValid,
           onPressed: _isStepValid
               ? () => {

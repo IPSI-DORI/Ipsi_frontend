@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/features/splash/views/splash_screen.dart';
 import '../features/chatbot/views/chat_screen.dart';
+import '../features/curriculum/views/curriculum_default_screen.dart';
 import '../features/curriculum/views/curriculum_screen.dart';
 import '../features/mypage/views/mypage_screen.dart';
 
@@ -15,7 +16,7 @@ class AppRoutes {
   static Map<String, WidgetBuilder> get routes => {
     auth: (context) => SplashScreen(),
     chatbot: (context) => ChatScreen(),
-    curriculum: (context) => CurriculumScreen(),
+    curriculum: (context) => CurriculumDefaultScreen(),
     mypage: (context) => MyPageScreen()
   };
 }

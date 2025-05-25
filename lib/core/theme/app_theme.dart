@@ -7,12 +7,10 @@ class AppTheme {
   static ThemeData get light => ThemeData(
     useMaterial3: true,
     fontFamily: 'Pretendard',
-    scaffoldBackgroundColor: AppColors.white,
     colorScheme: ColorScheme.light(
       primary: AppColors.primary,
       onPrimary: Colors.white,
       surface: Colors.white,
-      onSurface: AppColors.gray800,
     ),
     textTheme: appTextTheme,
   );

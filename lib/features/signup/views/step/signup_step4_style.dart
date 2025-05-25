@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/app_dropdown.dart';
+import 'package:ipsi_frontend/core/components/text/app_dropdown.dart';
 import 'package:ipsi_frontend/core/components/text/section_title.dart';
 
 class SignupStep4Style extends StatelessWidget {

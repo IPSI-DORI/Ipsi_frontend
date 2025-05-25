@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class AppColors {
   
   // 주요 컬러
-  static const Color primary = Color(0xFF36B2A3);
-  static const Color primary2 = Color(0xFFACE6E0);
-  static const Color primary3 = Color(0xFFEEFAF9);
+  static const Color primary = Color(0xFF43D4D2);
+  static const Color primary2 = Color(0xFFB4F2EC);
+  static const Color primary3 = Color(0xFFE4F9F7);
 
   // 그레이 컬러
   static const Color gray800 = Color(0xFF26292D);
@@ -14,10 +14,10 @@ class AppColors {
   static const Color gray600 = Color(0xFF4A4F52);
   static const Color gray500 = Color(0xFF5B6165);
   static const Color gray400 = Color(0xFF798084);
-  static const Color gray300 = Color(0xFF939BA0);
-  static const Color gray200 = Color(0xFFD3D1CE);
-  static const Color gray100 = Color(0xFFD0D9DF);
-  static const Color gray0 = Color(0xFFF7F8F8);
+  static const Color gray300 = Color(0xFF9AA0A4);
+  static const Color gray200 = Color(0xFFCED0D1);
+  static const Color gray100 = Color(0xFFE7E7E7);
+  static const Color gray0 = Color(0xFFF3F3F3);
   static const Color white = Color(0xFFFFFFFF);
   
   // 그외 컬러

@@ -77,3 +77,11 @@ final primaryLogo = TextStyle(
   height: 1.7,
   color: AppColors.primary,
 );
+
+final HomeLogo = TextStyle(
+  fontFamily: 'Cafe24Ssurround',
+  fontSize: 24,
+  fontWeight: FontWeight.w700,
+  height: 1.7,
+  color: AppColors.primary,
+);

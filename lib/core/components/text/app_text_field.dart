@@ -56,7 +56,7 @@ class AppTextField extends StatelessWidget {
 
                   // 인풋란 배경색
                   filled: true,
-                  fillColor: AppColors.gray0,
+                  fillColor: AppColors.white,
 
                   // 여백
                   contentPadding: const EdgeInsets.symmetric(

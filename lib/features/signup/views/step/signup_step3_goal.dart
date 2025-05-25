@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/app_dropdown.dart';
-import 'package:ipsi_frontend/core/components/app_text_field.dart';
+import 'package:ipsi_frontend/core/components/text/app_dropdown.dart';
+import 'package:ipsi_frontend/core/components/text/app_text_field.dart';
 import 'package:ipsi_frontend/core/components/text/section_title.dart';
 
 class SignupStep3Goal extends StatelessWidget {

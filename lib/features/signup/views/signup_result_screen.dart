@@ -14,6 +14,7 @@ class SignupResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -70,6 +71,7 @@ class SignupResultScreen extends StatelessWidget {
                   height: 56,
                   child: AppButton(
                       text: '시작하기',
+                      size: AppButtonSize.large,
                       onPressed: () {
                         Navigator.push(
                             context,
