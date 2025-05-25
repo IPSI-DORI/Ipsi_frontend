@@ -35,6 +35,7 @@ flutter:
     - assets/images/characters/sad_  morrie.png
     - assets/images/characters/morrie.png
     - assets/images/characters/dori.png
+    - assets/images/icon/done_morrie.png
     - assets/images/characters/norrie.png
     - assets/images/icon/alert.png
     - assets/images/icon/back.png

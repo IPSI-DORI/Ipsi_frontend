@@ -36,6 +36,7 @@ class AppDropdown<T> extends StatelessWidget {
 
           DropdownButtonFormField<T>(
             value: value,
+            isExpanded: true,
             items: items
                 .map((item) =>
                     DropdownMenuItem(value: item, child: Text(item.toString())))
