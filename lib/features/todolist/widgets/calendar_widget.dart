@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class CalendarWidget extends StatelessWidget {
   final DateTime selectedDate;
   final Function(DateTime) onDateSelected;
-  final Map<DateTime, int> completionMap; // ex: {2025-05-01: 30}
+  final Map<DateTime, int> completionMap; 
 
   CalendarWidget({
     required this.selectedDate,
