@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
+import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
   final int selectedIndex;
@@ -20,27 +21,34 @@ class CustomBottomNavigation extends StatelessWidget {
       _NavItem('마이', 'mypage'),
     ];
 
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: selectedIndex,
-      onTap: onItemTapped,
-      selectedItemColor: AppColors.primary,
-      unselectedItemColor: AppColors.gray300,
-      showUnselectedLabels: true,
-      items: items.asMap().entries.map((entry) {
-        final i = entry.key;
-        final item = entry.value;
-        final isSelected = i == selectedIndex;
+    return Container(
+      decoration: BoxDecoration(
+          border: const Border(
+        top: BorderSide(color: AppColors.gray0, width: 1),
+      )),
+      child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: selectedIndex,
+        onTap: onItemTapped,
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: AppColors.gray300,
+        showUnselectedLabels: true,
+        backgroundColor: Colors.white,
+        items: items.asMap().entries.map((entry) {
+          final i = entry.key;
+          final item = entry.value;
+          final isSelected = i == selectedIndex;
 
-        return BottomNavigationBarItem(
-          label: item.label,
-          icon: Image.asset(
-            'assets/images/bottombar/${item.iconName}${isSelected ? '_click' : ''}.png',
-            width: 24,
-            height: 24,
-          ),
-        );
-      }).toList(),
+          return BottomNavigationBarItem(
+            label: item.label,
+            icon: Image.asset(
+              'assets/images/bottombar/${item.iconName}${isSelected ? '_click' : ''}.png',
+              width: 24,
+              height: 24,
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 }
