@@ -6,7 +6,9 @@ class CurriculumViewModel extends ChangeNotifier {
   List<String> selectedSubjects = List.filled(4, '');
   List<String> selectedDetailSubjects = List.filled(4, '');
   List<String> selectedExamType = List.filled(4, '');
-  List<String> selectedLectureIndex = List.filled(4, '');
+  
+  // 선택된 강의 인덱스 - int?로 변경 (단일 선택)
+  int? selectedLectureIndex;
 
   // 시간 관련
   String selectedTimeSlot = '';
@@ -39,8 +41,27 @@ class CurriculumViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSelectedLecture(int page) {
-    _currentPage = page;
+  // 강의 선택 메서드 수정
+  void setSelectedLecture(int index) {
+    selectedLectureIndex = index;
+    notifyListeners();
+  }
+
+  // 선택 초기화 메서드 추가
+  void clearSelection() {
+    selectedLectureIndex = null;
+    notifyListeners();
+  }
+
+  void addDay(String day) {
+    if (!selectedDays.contains(day)) {
+      selectedDays.add(day);
+      notifyListeners();
+    }
+  }
+
+   void removeDay(String day) {
+    selectedDays.remove(day);
     notifyListeners();
   }
 
@@ -83,22 +104,23 @@ class CurriculumViewModel extends ChangeNotifier {
   }
 
   bool canProceed(int page) {
-  switch (page) {
-    case 0:
-      return selectedSubjects[0].isNotEmpty &&
-             selectedDetailSubjects[0].isNotEmpty;
-    case 1:
-      return selectedTimeSlot.isNotEmpty &&
-             selectedDays.isNotEmpty;
-    case 2:
-      return selectedExamType.isNotEmpty &&
-              selectedExamTypeValue.isNotEmpty;
-    case 3:
-      return surveyAnswers.isNotEmpty;
-    case 4: 
-      return selectedLectureIndex.isNotEmpty;
-    default:
-      return true;
+    switch (page) {
+      case 0:
+        return selectedSubjects[0].isNotEmpty &&
+               selectedDetailSubjects[0].isNotEmpty;
+      case 1:
+        return selectedTimeSlot.isNotEmpty &&
+               selectedDays.isNotEmpty;
+      case 2:
+        return selectedExamType.isNotEmpty &&
+                selectedExamTypeValue.isNotEmpty;
+      case 3:
+        return surveyAnswers.isNotEmpty;
+      case 4: 
+        // 강의 선택 페이지 조건 수정
+        return selectedLectureIndex != null;
+      default:
+        return true;
+    }
   }
-}
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'core/theme/app_theme.dart';
 import 'routes/app_routes.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,11 +7,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: "Pretendard",
+        ),
       title: '입시도리',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      initialRoute: AppRoutes.auth,
+      initialRoute: AppRoutes.curriculum,
       routes: AppRoutes.routes,
     );
   }
 }
+
