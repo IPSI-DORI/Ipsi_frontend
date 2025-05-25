@@ -26,7 +26,7 @@ class _HomeMainViewState extends State<HomeMainView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 헤더
-            HomeHeader(logo: "입시도리", d_day: '179'),
+            HomeHeader(logo: "입시도리"),
 
             // 통계 카드
             StatsCard(
