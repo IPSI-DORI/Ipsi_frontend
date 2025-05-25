@@ -16,29 +16,23 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingL, vertical: AppSizes.paddingXS),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSizes.paddingL, vertical: AppSizes.paddingXS),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// 로고 + D-day + 알림
+            /// 로고 + D-day
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 /// 좌측: 로고 + D-day
                 Row(
                   children: [
-                    Text(logo, style: primaryLogo),
+                    Text(logo, style: HomeLogo),
                     const SizedBox(width: 10),
                     Text('D-', style: appTextTheme.bodyLarge),
                     Text(d_day, style: appTextTheme.bodyLarge),
                   ],
-                ),
-
-                /// 우측: 알림 아이콘
-                Image.asset(
-                  'assets/images/icon/alert.png',
-                  width: AppSizes.iconM,
-                  height: AppSizes.iconM,
                 ),
               ],
             ),

@@ -59,3 +59,8 @@ flutter:
           weight: 600
         - asset: assets/fonts/pretendard/pretendard_bold.ttf
           weight: 700
+
+    - family: Cafe24Ssurround
+      fonts:
+        - asset: assets/fonts/cafe24Ssurround/cafe24Ssurround.ttf
+          weight: 700
