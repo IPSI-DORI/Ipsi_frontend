@@ -40,7 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(height: 100),
-        Image.asset('assets/images/characters/dori.png', height: 200),
+        Image.asset('assets/images/characters/dori/dori.png', height: 200),
         const SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -123,6 +123,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: Column(
         children: [
           Expanded(

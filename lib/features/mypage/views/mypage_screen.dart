@@ -6,7 +6,7 @@ import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
 
 import '../../../core/components/button/app_button.dart';
-import 'grade_management.dart';
+import 'grade_screen.dart';
 
 class MyPageScreen extends StatelessWidget {
   const MyPageScreen({super.key});
@@ -27,7 +27,7 @@ class MyPageScreen extends StatelessWidget {
               children: [
                 // 캐릭터 프로필 이미지
                 Image.asset(
-                  'assets/images/characters/level1_morrie.png',
+                  'assets/images/characters/morrie/morrie.png',
                   height: 64,
                 ),
 
@@ -57,7 +57,7 @@ class MyPageScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => GradeManagement()),
+                    MaterialPageRoute(builder: (context) => GradeScreen()),
                   );
                 },
                 size: AppButtonSize.medium),

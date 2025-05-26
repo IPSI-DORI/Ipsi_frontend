@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../../constants/app_sizes.dart';
 import '../../theme/text_theme.dart';
 
-class TitleHeader extends StatelessWidget {
+class BackTitleHeader extends StatelessWidget {
   final String title;
 
-  const TitleHeader({
+  const BackTitleHeader({
     super.key,
     required this.title,
   });
@@ -19,9 +19,14 @@ class TitleHeader extends StatelessWidget {
           horizontal: AppSizes.paddingL,
           vertical: AppSizes.paddingXS,
         ),
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Image.asset(
+              'assets/images/icon/back.png',
+              width: 24,
+              height: 24,
+            ),
             Text(
               title,
               style: appTextTheme.titleLarge,
