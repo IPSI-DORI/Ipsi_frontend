@@ -255,7 +255,6 @@ class _SignupScreenState extends State<SignupScreen> {
                             onQuestion2Changed: _onQuestion2Changed,
                             onQuestion3Changed: _onQuestion3Changed,
                             onQuestion4Changed: _onQuestion4Changed)
-                      // 이후 단계도 if (_currentStep == 1) ... 식으로 추가 가능
                     ],
                   ),
                 );

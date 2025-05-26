@@ -19,7 +19,7 @@ class SignupResultScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 80),
             Image.asset(
-              'assets/images/characters/morrie/morrie.png',
+              'assets/images/characters/morrie/level1_morrie.png',
               height: 200,
             ),
             const SizedBox(height: 40),

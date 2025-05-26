@@ -31,7 +31,11 @@ flutter:
     - assets/images/bottombar/curriculum_click.png
     - assets/images/bottombar/mypage.png
     - assets/images/bottombar/mypage_click.png
-    - assets/images/characters/raggy/raggy.png
+    - assets/images/characters/raggy/level1_raggy.png
+    - assets/images/characters/raggy/level2_raggy.png
+    - assets/images/characters/raggy/level3_raggy.png
+    - assets/images/characters/raggy/level4_raggy.png
+    - assets/images/characters/raggy/level5_raggy.png
     - assets/images/characters/morrie/morrie.png
     - assets/images/characters/morrie/level1_morrie.png
     - assets/images/characters/morrie/level2_morrie.png
