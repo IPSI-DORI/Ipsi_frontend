@@ -4,6 +4,9 @@ import 'package:ipsi_frontend/core/components/header/back_title_header.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/features/mypage/views/grage_add_screen.dart';
 
+import '../../../core/theme/text_theme.dart';
+import 'grade_detail_screen.dart';
+
 class GradeScreen extends StatelessWidget {
   const GradeScreen({super.key});
 
@@ -19,7 +22,7 @@ class GradeScreen extends StatelessWidget {
 
           // 필터 버튼
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -35,16 +38,14 @@ class GradeScreen extends StatelessWidget {
           // 카드 리스트
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
               children: [
-                _buildGradeCard("2024년 11월 평가원 모의고사"),
-                _buildGradeCard("2024년 9월 평가원 모의고사"),
-                _buildGradeCard("2024년 6월 평가원 모의고사"),
-                _buildGradeCard("2024년 3월 평가원 모의고사"),
+                _buildGradeCard(context, "2024년 11월 평가원 모의고사"),
+                _buildGradeCard(context, "2024년 9월 평가원 모의고사"),
+                _buildGradeCard(context, "2024년 6월 평가원 모의고사"),
+                _buildGradeCard(context, "2024년 3월 평가원 모의고사"),
               ],
             ),
           ),
-
           // 추가하기 버튼
           AppButton(
             size: AppButtonSize.large,
@@ -65,22 +66,59 @@ class GradeScreen extends StatelessWidget {
     return ChoiceChip(label: Text(label), selected: selected);
   }
 
-  Widget _buildGradeCard(String title) {
+  Widget _buildGradeCard(BuildContext context, String title) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-          color: AppColors.gray0, borderRadius: BorderRadius.circular(10)),
-      child: Row(
+          color: AppColors.gray0, borderRadius: BorderRadius.circular(12)),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: TextTheme().titleLarge),
-          Spacer(),
-          Image.asset(
-            "assets/images/icon/cancel.png",
-            height: 24,
-            width: 24,
-          )
+          // 제목 + 취소 아이콘
+          Row(
+            children: [
+              Text(title, style: TextTheme().titleLarge),
+              Spacer(),
+              Image.asset(
+                "assets/images/icon/cancel.png",
+                height: 24,
+                width: 24,
+              ),
+            ],
+          ),
+
+          Row(
+            children: [
+              Text(
+                "국어",
+                style:
+                    appTextTheme.bodySmall?.copyWith(color: AppColors.gray500),
+              ),
+              Text(" | ",
+                  style: appTextTheme.bodySmall
+                      ?.copyWith(color: AppColors.gray500)),
+              Text("수학",
+                  style: appTextTheme.bodySmall
+                      ?.copyWith(color: AppColors.gray500)),
+              Text(" | ",
+                  style: appTextTheme.bodySmall
+                      ?.copyWith(color: AppColors.gray500)),
+              Text("탐구",
+                  style: appTextTheme.bodySmall
+                      ?.copyWith(color: AppColors.gray500)),
+            ],
+          ),
+          AppButton(
+              size: AppButtonSize.medium,
+              style: AppButtonStyle.outlined,
+              text: "상세보기",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GradeDetailScreen()),
+                );
+              })
         ],
       ),
     );
