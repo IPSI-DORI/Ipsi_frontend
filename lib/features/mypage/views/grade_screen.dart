@@ -64,7 +64,8 @@ class _GradeScreenState extends State<GradeScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              spacing: 10,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: months.map((month) => _buildFilterClip(month)).toList(),
             ),
           ),
@@ -100,6 +101,7 @@ class _GradeScreenState extends State<GradeScreen> {
 
   Widget _buildFilterClip(String month) {
     return ChoiceChip(
+      showCheckmark: false,
       label: Text(month),
       selected: selectedMonths == month,
       onSelected: (_) {
