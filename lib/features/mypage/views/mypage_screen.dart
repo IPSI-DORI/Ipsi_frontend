@@ -4,12 +4,30 @@ import 'package:ipsi_frontend/core/components/text/text_icon_field.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
+import 'package:ipsi_frontend/features/mypage/views/profile_screen.dart';
 
 import '../../../core/components/button/app_button.dart';
 import 'grade_screen.dart';
 
-class MyPageScreen extends StatelessWidget {
+class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
+
+  @override
+  State<MyPageScreen> createState() => _MyPageScreenState();
+}
+
+class _MyPageScreenState extends State<MyPageScreen> {
+  String? _selectedExamTitle;
+  String? _selectedExamYear;
+
+  final TextEditingController _examYearController = TextEditingController();
+
+  // 시험 제목 선택
+  void _onExamTitleChanged(String? value) {
+    setState(() {
+      _selectedExamTitle = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,29 +41,41 @@ class MyPageScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(
                 horizontal: AppSizes.paddingL, vertical: AppSizes.paddingL),
-            child: Row(
-              children: [
-                // 캐릭터 프로필 이미지
-                Image.asset(
-                  'assets/images/characters/morrie/morrie.png',
-                  height: 64,
-                ),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfileScreen(
+                            onExamTitleChanged: _onExamTitleChanged,
+                            examYearController: _examYearController,
+                          )),
+                );
+              },
+              child: Row(
+                children: [
+                  // 캐릭터 프로필 이미지
+                  Image.asset(
+                    'assets/images/characters/morrie/morrie.png',
+                    height: 64,
+                  ),
 
-                // 여백
-                const SizedBox(width: AppSizes.paddingXS),
+                  // 여백
+                  const SizedBox(width: AppSizes.paddingXS),
 
-                // 닉네임 텍스트
-                Text("닉네임", style: appTextTheme.bodyLarge),
+                  // 닉네임 텍스트
+                  Text("닉네임", style: appTextTheme.bodyLarge),
 
-                // 여백 자동 확보
-                const Spacer(),
+                  // 여백 자동 확보
+                  const Spacer(),
 
-                // > 아이콘
-                Image.asset(
-                  'assets/images/icon/gray300_next.png',
-                  height: 24,
-                ),
-              ],
+                  // > 아이콘
+                  Image.asset(
+                    'assets/images/icon/gray300_next.png',
+                    height: 24,
+                  ),
+                ],
+              ),
             ),
           ),
 
