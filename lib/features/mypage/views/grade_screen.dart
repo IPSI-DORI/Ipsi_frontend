@@ -24,6 +24,18 @@ class GradeScreen extends StatefulWidget {
 
 // 상태 관리 클래스는 부모를 상속
 class _GradeScreenState extends State<GradeScreen> {
+  String? _selectedExamTitle;
+  String? _selectedExamYear;
+
+  final TextEditingController _examYearController = TextEditingController();
+
+  // 시험 제목 선택
+  void _onExamTitleChanged(String? value) {
+    setState(() {
+      _selectedExamTitle = value;
+    });
+  }
+
   // 선택된 달 설정 (변동돼서 final 불가능)
   String selectedMonths = "전체";
 
@@ -91,7 +103,11 @@ class _GradeScreenState extends State<GradeScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => GrageAddScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => GrageAddScreen(
+                            onExamTitleChanged: _onExamTitleChanged,
+                            examYearController: _examYearController,
+                          )),
                 );
               },
             ),
