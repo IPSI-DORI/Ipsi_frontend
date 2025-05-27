@@ -19,18 +19,30 @@ class BackTitleHeader extends StatelessWidget {
           horizontal: AppSizes.paddingL,
           vertical: AppSizes.paddingXS,
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            Image.asset(
-              'assets/images/icon/back.png',
-              width: 24,
-              height: 24,
+            // < 이미지
+            Align(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context); // 이전 화면으로 이동
+                },
+                child: Image.asset(
+                  'assets/images/icon/back.png',
+                  width: 24,
+                  height: 24,
+                ),
+              ),
             ),
-            Text(
-              title,
-              style: appTextTheme.titleLarge,
-            ),
+            Center(
+              child: Text(
+                title,
+                style: appTextTheme.titleLarge,
+              ),
+            )
+            // 제목
           ],
         ),
       ),

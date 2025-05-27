@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/button/app_button.dart';
 import 'package:ipsi_frontend/core/components/header/back_title_header.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
+import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/features/mypage/views/grage_add_screen.dart';
 
 import '../../../core/theme/text_theme.dart';
@@ -62,7 +63,8 @@ class _GradeScreenState extends State<GradeScreen> {
 
           // 필터 버튼
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.paddingL, vertical: AppSizes.paddingXS),
             child: Row(
               spacing: 10,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -80,7 +82,7 @@ class _GradeScreenState extends State<GradeScreen> {
 
           // SafeArea: 폰의 안전 영역을 자동으로 피하게 도와주는 위젯
           SafeArea(
-            minimum: EdgeInsets.all(20),
+            minimum: EdgeInsets.all(AppSizes.paddingL),
             child:
                 // 추가하기 버튼
                 AppButton(
@@ -123,10 +125,12 @@ class _GradeScreenState extends State<GradeScreen> {
 
   Widget _buildGradeCard(BuildContext context, String title) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: const EdgeInsets.symmetric(
+          horizontal: AppSizes.paddingL, vertical: AppSizes.paddingXS),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-          color: AppColors.gray0, borderRadius: BorderRadius.circular(12)),
+          color: AppColors.gray0,
+          borderRadius: BorderRadius.circular(AppSizes.radiusXL)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -143,7 +147,7 @@ class _GradeScreenState extends State<GradeScreen> {
             ],
           ),
 
-          const SizedBox(height: 3),
+          const SizedBox(height: AppSizes.padding3XS),
 
           Row(
             children: [
@@ -167,7 +171,7 @@ class _GradeScreenState extends State<GradeScreen> {
             ],
           ),
 
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.paddingXS),
 
           AppButton(
               size: AppButtonSize.medium,
