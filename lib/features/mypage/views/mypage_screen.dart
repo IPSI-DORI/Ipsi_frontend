@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/header/title_header.dart';
+import 'package:ipsi_frontend/core/components/modal/ConfirmModal.dart';
 import 'package:ipsi_frontend/core/components/text/text_icon_field.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
@@ -118,7 +119,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                         style: appTextTheme.bodyMedium
                             ?.copyWith(color: AppColors.gray300)),
                     TextIconField(title: "로그아웃"),
-                    TextIconField(title: "탈퇴하기")
+                    TextIconField(title: "탈퇴하기"),
                   ]))
         ]));
   }
