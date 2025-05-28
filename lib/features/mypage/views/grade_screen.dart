@@ -103,11 +103,7 @@ class _GradeScreenState extends State<GradeScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => GrageAddScreen(
-                            onExamTitleChanged: _onExamTitleChanged,
-                            examYearController: _examYearController,
-                          )),
+                  MaterialPageRoute(builder: (context) => GrageAddScreen()),
                 );
               },
             ),
