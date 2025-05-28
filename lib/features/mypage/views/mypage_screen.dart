@@ -48,8 +48,6 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => ProfileScreen(
-                            onExamTitleChanged: _onExamTitleChanged,
-                            examYearController: _examYearController,
                           )),
                 );
               },
@@ -85,6 +83,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
             padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingL),
             child: AppButton(
                 text: "성적 관리",
+                style: AppButtonStyle.outlined,
                 onPressed: () {
                   Navigator.push(
                     context,
