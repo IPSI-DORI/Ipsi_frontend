@@ -10,6 +10,7 @@ class TitleHeader extends StatelessWidget {
     required this.title,
   });
 
+  // UI
   @override
   Widget build(BuildContext context) {
     return SafeArea(

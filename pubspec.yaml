@@ -31,13 +31,28 @@ flutter:
     - assets/images/bottombar/curriculum_click.png
     - assets/images/bottombar/mypage.png
     - assets/images/bottombar/mypage_click.png
-    - assets/images/characters/raggy.png
-    - assets/images/characters/sad_morrie.png
-    - assets/images/characters/level1_morrie.png
-    - assets/images/characters/morrie.png
-    - assets/images/characters/dori.png
+    - assets/images/characters/raggy/level1_raggy.png
+    - assets/images/characters/raggy/level2_raggy.png
+    - assets/images/characters/raggy/level3_raggy.png
+    - assets/images/characters/raggy/level4_raggy.png
+    - assets/images/characters/raggy/level5_raggy.png
+    - assets/images/characters/morrie/morrie.png
+    - assets/images/characters/morrie/level1_morrie.png
+    - assets/images/characters/morrie/level2_morrie.png
+    - assets/images/characters/morrie/level3_morrie.png
+    - assets/images/characters/morrie/level4_morrie.png
+    - assets/images/characters/morrie/level5_morrie.png
+    - assets/images/characters/dori/level1_dori.png
+    - assets/images/characters/dori/level2_dori.png
+    - assets/images/characters/dori/level3_dori.png
+    - assets/images/characters/dori/level4_dori.png
+    - assets/images/characters/dori/level5_dori.png
     - assets/images/icon/done_morrie.png
-    - assets/images/characters/norrie.png
+    - assets/images/characters/norrie/level1_norrie.png
+    - assets/images/characters/norrie/level2_norrie.png
+    - assets/images/characters/norrie/level3_norrie.png
+    - assets/images/characters/norrie/level4_norrie.png
+    - assets/images/characters/norrie/level5_norrie.png
     - assets/images/characters/teacher.png
     - assets/images/icon/alert.png
     - assets/images/icon/back.png

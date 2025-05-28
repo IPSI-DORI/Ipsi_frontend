@@ -33,7 +33,7 @@ class _HomeMainViewState extends State<HomeMainView> {
               subtitle: "오늘도 같이 성장해볼까요?",
               currentLevel: "입문자 ",
               totalLevel: "/ 초보자",
-              imgPath: 'assets/images/characters/morrie.png',
+              imgPath: 'assets/images/characters/morrie/level1_morrie.png',
             ),
 
             // 챗봇, 커리큘럼 카드 버튼

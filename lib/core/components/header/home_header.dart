@@ -24,6 +24,7 @@ class HomeHeader extends StatelessWidget {
     return difference.toString();
   }
 
+  // UI
   @override
   Widget build(BuildContext context) {
     return SafeArea(

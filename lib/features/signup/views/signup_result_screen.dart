@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/button/app_button.dart';
 import 'package:ipsi_frontend/features/home/views/home_screen.dart';
-
 import '../../../core/theme/text_theme.dart';
 
 class SignupResultScreen extends StatelessWidget {
@@ -20,7 +19,7 @@ class SignupResultScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 80),
             Image.asset(
-              'assets/images/characters/morrie.png',
+              'assets/images/characters/morrie/level1_morrie.png',
               height: 200,
             ),
             const SizedBox(height: 40),

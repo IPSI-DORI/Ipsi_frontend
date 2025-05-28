@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/header/title_header.dart';
+import 'package:ipsi_frontend/core/components/header/back_title_header.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
-import 'package:ipsi_frontend/core/theme/text_theme.dart';
 
-import '../../../core/components/button/app_button.dart';
-
-class GradeManagement extends StatelessWidget {
-  const GradeManagement({super.key});
+class GradeDetailScreen extends StatelessWidget {
+  const GradeDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +13,8 @@ class GradeManagement extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 헤더
-            TitleHeader(title: "성적 관리"),
+            BackTitleHeader(title: "성적 조회"),
+
           ],
         ));
   }
