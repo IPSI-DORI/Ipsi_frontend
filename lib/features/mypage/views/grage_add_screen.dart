@@ -90,10 +90,10 @@ class _GradeAddScreenState extends State<GrageAddScreen> {
                     AppDropdown(
                       title: "시험 종류",
                       items: [
-                        "2024년 11월 평가원 모의고사",
-                        "2024년 9월 평가원 모의고사",
-                        "2024년 6월 평가원 모의고사",
-                        "2024년 3월 평가원 모의고사",
+                        "11월 평가원 모의고사",
+                        "9월 평가원 모의고사",
+                        "6월 평가원 모의고사",
+                        "3월 평가원 모의고사",
                       ],
                       hint: "시험 종류를 선택해주세요",
                       onChanged: (val) {
