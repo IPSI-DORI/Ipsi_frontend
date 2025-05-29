@@ -70,7 +70,6 @@ class _GradeAddScreenState extends State<GrageAddScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +109,35 @@ class _GradeAddScreenState extends State<GrageAddScreen> {
                     ),
                     AppDropdown(
                       title: "과목",
-                      items: ["국어", "수학", "사회탐구", "과학탐구"],
+                      items: [
+                        "독서",
+                        "문학",
+                        "언어와매체",
+                        "화법과작문",
+                        "수학1",
+                        "수학2",
+                        "확률과통계",
+                        "미적분",
+                        "기하",
+                        "생활과 윤리",
+                        "윤리와 사상",
+                        "한국지리",
+                        "세계지리",
+                        "동아시아사",
+                        "세계사",
+                        "정치와 법",
+                        "경제",
+                        "사회/문화",
+                        "물리학1",
+                        "물리학2",
+                        "화학1",
+                        "화학2",
+                        "생명과학1",
+                        "생명과학2",
+                        "지구과학1",
+                        "지구과학2",
+                        "한국사"
+                      ],
                       hint: "과목을 선택해주세요",
                       onChanged: (val) {
                         selectedExamSubjectYear = val;
