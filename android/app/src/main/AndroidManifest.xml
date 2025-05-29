@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="ipsi_frontend"
+        android:label="입시도리"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
