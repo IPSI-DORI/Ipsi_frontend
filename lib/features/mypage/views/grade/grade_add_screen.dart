@@ -5,16 +5,17 @@ import 'package:ipsi_frontend/core/components/text/app_dropdown.dart';
 import 'package:ipsi_frontend/core/components/text/app_text_field.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
-import 'package:ipsi_frontend/features/mypage/views/grade_screen.dart';
 
-class GrageAddScreen extends StatefulWidget {
-  const GrageAddScreen({super.key});
+import 'grade_screen.dart';
+
+class GradeAddScreen extends StatefulWidget {
+  const GradeAddScreen({super.key});
 
   @override
-  State<GrageAddScreen> createState() => _GradeAddScreenState();
+  State<GradeAddScreen> createState() => _GradeAddScreenState();
 }
 
-class _GradeAddScreenState extends State<GrageAddScreen> {
+class _GradeAddScreenState extends State<GradeAddScreen> {
   // 시험 년도 컨트롤러 생성
   final TextEditingController examYearController = TextEditingController();
 

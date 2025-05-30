@@ -5,10 +5,12 @@ import 'package:ipsi_frontend/core/components/text/text_icon_field.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
+import 'package:ipsi_frontend/features/mypage/views/alertScreen.dart';
+import 'package:ipsi_frontend/features/mypage/views/noticeScreen.dart';
 import 'package:ipsi_frontend/features/mypage/views/profile_screen.dart';
-
+import 'package:ipsi_frontend/features/onboarding/views/onboarding_screen.dart';
 import '../../../core/components/button/app_button.dart';
-import 'grade_screen.dart';
+import 'grade/grade_screen.dart';
 
 class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
@@ -46,9 +48,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => ProfileScreen(
-                          )),
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
                 );
               },
               child: Row(
@@ -103,22 +103,82 @@ class _MyPageScreenState extends State<MyPageScreen> {
                     Text("설정",
                         style: appTextTheme.bodyMedium
                             ?.copyWith(color: AppColors.gray300)),
-                    TextIconField(title: "알림 설정"),
+                    TextIconField(
+                      title: "알림 설정",
+                      oncClick: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Alertscreen()),
+                        );
+                      },
+                    ),
                     const SizedBox(height: AppSizes.paddingL),
                     Text("고객지원",
                         style: appTextTheme.bodyMedium
                             ?.copyWith(color: AppColors.gray300)),
                     Column(children: [
-                      TextIconField(title: "공지사항"),
-                      TextIconField(title: "의견 남기기"),
-                      TextIconField(title: "앱 관리")
+                      TextIconField(
+                        title: "공지사항",
+                        oncClick: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Noticescreen()),
+                          );
+                        },
+                      ),
+                      TextIconField(
+                        title: "문의하기",
+                        oncClick: () {},
+                      ),
                     ]),
                     const SizedBox(height: AppSizes.paddingL),
                     Text("기타",
                         style: appTextTheme.bodyMedium
                             ?.copyWith(color: AppColors.gray300)),
-                    TextIconField(title: "로그아웃"),
-                    TextIconField(title: "탈퇴하기"),
+                    TextIconField(
+                      title: "로그아웃",
+                      oncClick: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => ConfirmModal(
+                                title: "로그아웃 하시겠어요?",
+                                description: "로그아웃 시 다시 로그인 해야 합니다.",
+                                onConfirm: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            OnboardingScreen()),
+                                  );
+                                },
+                                onCancel: () {
+                                  Navigator.pop(context); // 이전 화면으로 이동
+                                }));
+                      },
+                    ),
+                    TextIconField(
+                      title: "탈퇴하기",
+                      oncClick: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context2) => ConfirmModal(
+                                title: "회원탈퇴 하시겠어요?",
+                                description: "회원탈퇴 시 일주일 간 계정 생성이 불가능합니다.",
+                                onConfirm: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context2) =>
+                                            OnboardingScreen()),
+                                  );
+                                },
+                                onCancel: () {
+                                  Navigator.pop(context); // 이전 화면으로 이동
+                                }));
+                      },
+                    ),
                   ]))
         ]));
   }

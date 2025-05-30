@@ -3,9 +3,8 @@ import 'package:ipsi_frontend/core/components/button/app_button.dart';
 import 'package:ipsi_frontend/core/components/header/back_title_header.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
-import 'package:ipsi_frontend/features/mypage/views/grage_add_screen.dart';
-
-import '../../../core/theme/text_theme.dart';
+import 'package:ipsi_frontend/features/mypage/views/grade/grade_add_screen.dart';
+import '../../../../core/theme/text_theme.dart';
 import 'grade_detail_screen.dart';
 
 class GradeScreen extends StatefulWidget {
@@ -103,7 +102,7 @@ class _GradeScreenState extends State<GradeScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => GrageAddScreen()),
+                  MaterialPageRoute(builder: (context) => GradeAddScreen()),
                 );
               },
             ),
