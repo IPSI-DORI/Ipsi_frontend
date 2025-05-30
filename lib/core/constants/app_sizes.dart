@@ -15,6 +15,9 @@ class AppSizes {
   static const double radiusM = 8.0;
   static const double radiusL = 10.0;
   static const double radiusXL = 12.0;
+  static const double radius2XL = 16.0;
+  static const double radius3XL = 20.0;
+
 
   // Font Size
   static const double font10 = 10.0;

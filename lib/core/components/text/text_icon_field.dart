@@ -7,11 +7,13 @@ import 'package:ipsi_frontend/core/theme/text_theme.dart';
 class TextIconField extends StatelessWidget {
   // 속성 정의
   final String title;
+  final VoidCallback? oncClick;
 
   // 생성자 정의
   const TextIconField(
       {super.key, // 상위 클래스에 전달
-      required this.title});
+      required this.title,
+      required this.oncClick});
 
   // ui
   @override
@@ -29,10 +31,13 @@ class TextIconField extends StatelessWidget {
               const Spacer(),
 
               // > 아이콘
-              Image.asset(
-                'assets/images/icon/gray300_next.png',
-                height: 24,
-              ),
+              GestureDetector(
+                onTap: oncClick,
+                child: Image.asset(
+                  'assets/images/icon/gray300_next.png',
+                  height: 24,
+                ),
+              )
             ])
           ],
         ));

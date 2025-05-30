@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/button/app_button.dart';
+import 'package:ipsi_frontend/core/components/app_button.dart';
 import 'package:ipsi_frontend/core/components/header/signup_header.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/features/signup/views/signup_result_screen.dart';

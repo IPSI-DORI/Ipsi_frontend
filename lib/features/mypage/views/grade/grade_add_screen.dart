@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/button/app_button.dart';
+import 'package:ipsi_frontend/core/components/app_button.dart';
 import 'package:ipsi_frontend/core/components/header/back_title_header.dart';
 import 'package:ipsi_frontend/core/components/text/app_dropdown.dart';
 import 'package:ipsi_frontend/core/components/text/app_text_field.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
-import 'package:ipsi_frontend/features/mypage/views/grade_screen.dart';
 
-class GrageAddScreen extends StatefulWidget {
-  const GrageAddScreen({super.key});
+import 'grade_screen.dart';
+
+class GradeAddScreen extends StatefulWidget {
+  const GradeAddScreen({super.key});
 
   @override
-  State<GrageAddScreen> createState() => _GradeAddScreenState();
+  State<GradeAddScreen> createState() => _GradeAddScreenState();
 }
 
-class _GradeAddScreenState extends State<GrageAddScreen> {
+class _GradeAddScreenState extends State<GradeAddScreen> {
   // 시험 년도 컨트롤러 생성
   final TextEditingController examYearController = TextEditingController();
 
@@ -70,7 +71,6 @@ class _GradeAddScreenState extends State<GrageAddScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,10 +91,10 @@ class _GradeAddScreenState extends State<GrageAddScreen> {
                     AppDropdown(
                       title: "시험 종류",
                       items: [
-                        "2024년 11월 평가원 모의고사",
-                        "2024년 9월 평가원 모의고사",
-                        "2024년 6월 평가원 모의고사",
-                        "2024년 3월 평가원 모의고사",
+                        "11월 평가원 모의고사",
+                        "9월 평가원 모의고사",
+                        "6월 평가원 모의고사",
+                        "3월 평가원 모의고사",
                       ],
                       hint: "시험 종류를 선택해주세요",
                       onChanged: (val) {
@@ -110,7 +110,35 @@ class _GradeAddScreenState extends State<GrageAddScreen> {
                     ),
                     AppDropdown(
                       title: "과목",
-                      items: ["국어", "수학", "사회탐구", "과학탐구"],
+                      items: [
+                        "독서",
+                        "문학",
+                        "언어와매체",
+                        "화법과작문",
+                        "수학1",
+                        "수학2",
+                        "확률과통계",
+                        "미적분",
+                        "기하",
+                        "생활과 윤리",
+                        "윤리와 사상",
+                        "한국지리",
+                        "세계지리",
+                        "동아시아사",
+                        "세계사",
+                        "정치와 법",
+                        "경제",
+                        "사회/문화",
+                        "물리학1",
+                        "물리학2",
+                        "화학1",
+                        "화학2",
+                        "생명과학1",
+                        "생명과학2",
+                        "지구과학1",
+                        "지구과학2",
+                        "한국사"
+                      ],
                       hint: "과목을 선택해주세요",
                       onChanged: (val) {
                         selectedExamSubjectYear = val;

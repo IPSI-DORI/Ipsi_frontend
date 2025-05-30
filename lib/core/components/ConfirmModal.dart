@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../constants/app_colors.dart';
-import '../../constants/app_sizes.dart';
-import '../button/app_button.dart';
+import '../constants/app_colors.dart';
+import '../constants/app_sizes.dart';
+import 'app_button.dart';
 
 class ConfirmModal extends StatelessWidget {
   final String title;
@@ -21,16 +21,18 @@ class ConfirmModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: AppColors.white,
+      insetPadding: EdgeInsets.all(20),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.radiusL),
       ),
-      insetPadding: const EdgeInsets.all(20),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: AppSizes.paddingXL,
+          vertical: AppSizes.paddingL,
           horizontal: AppSizes.paddingL,
         ),
         child: Column(
+          // Column(세로) 방향의 크기를 내용만큼만 설정
+          mainAxisSize: MainAxisSize.min,
           children: [
             // 상단 바
             Container(
@@ -43,6 +45,8 @@ class ConfirmModal extends StatelessWidget {
               ),
             ),
 
+            const SizedBox(height: AppSizes.paddingS),
+
             // 제목
             Text(
               title,
@@ -52,7 +56,7 @@ class ConfirmModal extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: AppSizes.paddingXS),
+            const SizedBox(height: AppSizes.padding2XS),
 
             // 설명
             Text(
@@ -64,7 +68,7 @@ class ConfirmModal extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
 
-            const SizedBox(height: AppSizes.paddingXL),
+            const SizedBox(height: AppSizes.paddingL),
 
             // 버튼 2개
             Row(

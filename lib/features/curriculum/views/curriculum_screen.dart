@@ -1,7 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:ipsi_frontend/core/components/app_button.dart';
+import 'package:ipsi_frontend/core/constants/app_colors.dart';
+import 'package:ipsi_frontend/core/constants/app_sizes.dart';
+import 'package:ipsi_frontend/core/theme/text_theme.dart';
+import 'package:ipsi_frontend/features/curriculum/views/curriculum_creating_screen.dart';
 import 'package:provider/provider.dart';
-import '../../../core/widgets/curriculum_done.dart';
+import 'curriculum_done_Screen.dart';
 import '../viewmodels/curriculum_view_model.dart';
 import '../../../core/widgets/lecture_detail_modal.dart';
 
@@ -51,7 +56,8 @@ class _OnboardingViewState extends State<CurriculumScreen> {
   }
 
   // 강의 목록을 새로고침하는 함수 (예시 구현)
-  void _regenerateLectures(BuildContext context, CurriculumViewModel viewModel) {
+  void _regenerateLectures(
+      BuildContext context, CurriculumViewModel viewModel) {
     setState(() {
       // 예시: 강의 목록을 무작위로 섞거나 새로 생성
       _lectureContent.shuffle(Random());
@@ -112,7 +118,15 @@ class _OnboardingViewState extends State<CurriculumScreen> {
 
   // 등급 선택 옵션
   final List<String> _gradeOptions = [
-    '1등급', '2등급', '3등급', '4등급', '5등급', '6등급', '7등급', '8등급', '9등급'
+    '1등급',
+    '2등급',
+    '3등급',
+    '4등급',
+    '5등급',
+    '6등급',
+    '7등급',
+    '8등급',
+    '9등급'
   ];
 
   // 설문조사 질문 목록
@@ -190,6 +204,7 @@ class _OnboardingViewState extends State<CurriculumScreen> {
       child: Consumer<CurriculumViewModel>(
         builder: (context, viewModel, _) {
           return Scaffold(
+            backgroundColor: AppColors.white,
             body: SafeArea(
               child: Column(
                 children: [
@@ -233,23 +248,23 @@ class _OnboardingViewState extends State<CurriculumScreen> {
     String headerText;
     switch (viewModel.currentPage) {
       case 0:
-      headerText = '커리큘럼 과목을 알려주세요';
-      break;
+        headerText = '커리큘럼 과목을 알려주세요';
+        break;
       case 1:
-      headerText = '커리큘럼 공부 시간과 요일을 정해주세요';
-      break;
+        headerText = '커리큘럼 공부 시간과 요일을 정해주세요';
+        break;
       case 2:
-      headerText = '최근 모의고사 성적을 입력해주세요';
-      break;
+        headerText = '최근 모의고사 성적을 입력해주세요';
+        break;
       case 3:
-      headerText = '간단한 설문조사에 응답해주세요';
-      break;
-      case 4: 
-      headerText = '듣고싶은 맞춤 강의를 선택해주세요';
+        headerText = '간단한 설문조사에 응답해주세요';
+        break;
+      case 4:
+        headerText = '듣고싶은 맞춤 강의를 선택해주세요';
       default:
-      headerText = '';
+        headerText = '';
     }
-    
+
     return Column(
       children: [
         Padding(
@@ -271,21 +286,20 @@ class _OnboardingViewState extends State<CurriculumScreen> {
               ),
               const Spacer(),
               Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(5, (index) {
-                  return Container(
-                    width: 8,
-                    height: 8,
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: index == viewModel.currentPage
-                          ? Colors.teal
-                          : Colors.grey.shade300,
-                    ),
-                  );
-                }),
-              ),
+                  mainAxisSize: MainAxisSize.min,
+                  children: List.generate(5, (index) {
+                    return Container(
+                      width: 8,
+                      height: 8,
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: index == viewModel.currentPage
+                            ? AppColors.primary
+                            : AppColors.gray100,
+                      ),
+                    );
+                  })),
               const Spacer(),
               const SizedBox(width: 48), // 뒤로가기 버튼과 균형을 맞추기 위한 여백
             ],
@@ -303,7 +317,8 @@ class _OnboardingViewState extends State<CurriculumScreen> {
     );
   }
 
-  Widget _buildSubjectPage(BuildContext context, int pageIndex, CurriculumViewModel viewModel) {
+  Widget _buildSubjectPage(
+      BuildContext context, int pageIndex, CurriculumViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
@@ -343,7 +358,9 @@ class _OnboardingViewState extends State<CurriculumScreen> {
             pageIndex,
             viewModel.selectedSubjects[pageIndex].isEmpty
                 ? []
-                : _subjectOptions[pageIndex][viewModel.selectedSubjects[pageIndex]] ?? [],
+                : _subjectOptions[pageIndex]
+                        [viewModel.selectedSubjects[pageIndex]] ??
+                    [],
             viewModel.selectedDetailSubjects[pageIndex],
             (value) => viewModel.setDetailSubject(pageIndex, value),
             '원하시는 선택과목을 선택해주세요',
@@ -353,7 +370,8 @@ class _OnboardingViewState extends State<CurriculumScreen> {
     );
   }
 
-  Widget _buildTimeAndDayPage(BuildContext context, CurriculumViewModel viewModel) {
+  Widget _buildTimeAndDayPage(
+      BuildContext context, CurriculumViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
@@ -390,7 +408,7 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                 "(중복 가능)",
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.teal.shade300,
+                  color: AppColors.gray600,
                 ),
               ),
             ],
@@ -402,7 +420,8 @@ class _OnboardingViewState extends State<CurriculumScreen> {
     );
   }
 
-  Widget _buildExamScoresPage(BuildContext context, CurriculumViewModel viewModel) {
+  Widget _buildExamScoresPage(
+      BuildContext context, CurriculumViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: SingleChildScrollView(
@@ -421,7 +440,9 @@ class _OnboardingViewState extends State<CurriculumScreen> {
               context,
               0,
               _examTypes,
-              viewModel.selectedExamType.isNotEmpty ? viewModel.selectedExamType.first : '',
+              viewModel.selectedExamType.isNotEmpty
+                  ? viewModel.selectedExamType.first
+                  : '',
               (value) => viewModel.setExamType(value),
               '시험 종류를 선택해주세요',
             ),
@@ -441,7 +462,8 @@ class _OnboardingViewState extends State<CurriculumScreen> {
           children: [
             ..._surveyQuestions.map((questionData) {
               final String question = questionData['question'];
-              final List<String> options = questionData['options'].cast<String>();
+              final List<String> options =
+                  questionData['options'].cast<String>();
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -481,7 +503,8 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 8),
                     ),
                     // dropdownMaxHeight: 200, // Flutter 3.16+ only
                   ),
@@ -496,7 +519,8 @@ class _OnboardingViewState extends State<CurriculumScreen> {
     );
   }
 
-  Widget _buildLecturePage(BuildContext context, CurriculumViewModel viewModel) {
+  Widget _buildLecturePage(
+      BuildContext context, CurriculumViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: SingleChildScrollView(
@@ -518,10 +542,10 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                     side: isSelected
-                        ? BorderSide(color: Colors.teal, width: 2)
-                        : BorderSide.none,
+                        ? BorderSide(color: AppColors.primary, width: 1)
+                        : BorderSide(color: AppColors.gray200, width: 1),
                   ),
-                  color: isSelected ? Colors.teal.shade50 : null,
+                  color: isSelected ? AppColors.primary3 : AppColors.gray0,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
@@ -529,42 +553,43 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                       children: [
                         Text(
                           lectureData['title'],
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: appTextTheme.titleMedium,
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: AppSizes.padding3XS),
                         Row(
                           children: [
-                            Chip(
-                              label: Text(lectureData['price']),
-                              backgroundColor: lectureData['price'] == '무료'
-                                  ? Colors.teal.shade100
-                                  : Colors.orange.shade100,
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text('강사: ${lectureData['name']}'),
-                            ),
-                            const SizedBox(width: 8),
-                            Text('시간: ${lectureData['time']}'),
+                            Text(lectureData['price']),
+                            const SizedBox(width: AppSizes.padding3XS),
+                            Text("|",
+                                style: appTextTheme.bodySmall
+                                    ?.copyWith(color: AppColors.gray500)),
+                            const SizedBox(width: AppSizes.padding3XS),
+                            Text('${lectureData['name']}'),
+                            const SizedBox(width: AppSizes.padding3XS),
+                            Text("|",
+                                style: appTextTheme.bodySmall
+                                    ?.copyWith(color: AppColors.gray500)),
+                            const SizedBox(width: AppSizes.padding3XS),
+                            Text('${lectureData['time']}'),
                           ],
                         ),
                         const SizedBox(height: 12),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: TextButton(
+                          child: AppButton(
                             onPressed: () {
                               showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
                                 builder: (context) => LectureDetailModal(
                                   lectureData: lectureData,
                                   onNext: () {
-                                    // 다음 단계 로직 추가
-                                    // 예시: Navigator.pop(context);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CurriculumCreatingScreen()),
+                                    );
                                   },
                                   onRestart: () {
                                     _regenerateLectures(context, viewModel);
@@ -572,7 +597,9 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                                 ),
                               );
                             },
-                            child: const Text('상세보기'),
+                            size: AppButtonSize.medium,
+                            style: AppButtonStyle.outlined,
+                            text: '상세보기',
                           ),
                         ),
                       ],
@@ -590,34 +617,34 @@ class _OnboardingViewState extends State<CurriculumScreen> {
   // 요일 선택 위젯
   Widget _buildDaySelector(CurriculumViewModel viewModel) {
     return Wrap(
-      spacing: 8.0,
+      spacing: 3.0,
       children: _days.map((day) {
         final bool isSelected = viewModel.selectedDays.contains(day);
         return InkWell(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppSizes.radius3XL),
           onTap: () {
             setState(() {
               if (isSelected) {
-          viewModel.removeDay(day);
+                viewModel.removeDay(day);
               } else {
-          viewModel.addDay(day);
+                viewModel.addDay(day);
               }
             });
           },
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.paddingM, vertical: AppSizes.paddingS),
             decoration: BoxDecoration(
-              color: isSelected ? Colors.teal.shade200 : Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(20),
-              border: isSelected
-            ? Border.all(color: Colors.teal, width: 2)
-            : Border.all(color: Colors.transparent),
-            ),
+                color: isSelected ? AppColors.primary3 : AppColors.white,
+                borderRadius: BorderRadius.circular(AppSizes.radiusM),
+                border: isSelected
+                    ? Border.all(color: AppColors.primary, width: 1)
+                    : Border.all(color: AppColors.gray200, width: 1)),
             child: Text(
               day,
               style: TextStyle(
-          color: isSelected ? Colors.white : Colors.black87,
-          fontWeight: FontWeight.bold,
+                color: isSelected ? AppColors.primary : AppColors.gray300,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -631,45 +658,37 @@ class _OnboardingViewState extends State<CurriculumScreen> {
       padding: const EdgeInsets.all(16.0),
       child: SizedBox(
         width: double.infinity,
-        height: 48,
-        child: ElevatedButton(
-          onPressed: () {
-            if (viewModel.currentPage < 4) {
-              _pageController.nextPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
-            } else {
-              // 마지막 페이지에서의 동작 (예: 제출)
-              Navigator.of(context).pop();
-            }
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.teal,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          child: Text(
-            viewModel.currentPage < 4 ? '다음' : '완료',
-            style: const TextStyle(fontSize: 16, color: Colors.white),
-          ),
-        ),
+        child: AppButton(
+            onPressed: () {
+              if (viewModel.currentPage < 4) {
+                _pageController.nextPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              } else {
+                // 마지막 페이지에서의 동작 (예: 제출)
+                Navigator.of(context).pop();
+              }
+            },
+            size: AppButtonSize.large,
+            text: '다음'),
       ),
     );
   }
 
   Widget _buildLastButton(CurriculumViewModel viewModel) {
+    final bool hasSelection = viewModel.selectedLectureIndex != null;
+
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(AppSizes.radius2XL),
       child: SizedBox(
         width: double.infinity,
-        child: ElevatedButton(
+        child: AppButton(
           onPressed: () {
-            if (viewModel.selectedLectureIndex != null) {
+            if (hasSelection) {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const CurriculumDone(),
+                  builder: (context) => const CurriculumCreatingScreen(),
                 ),
               );
               widget.onNext?.call();
@@ -678,24 +697,11 @@ class _OnboardingViewState extends State<CurriculumScreen> {
               widget.onRestart?.call();
             }
           },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: viewModel.selectedLectureIndex != null ? Colors.teal : Colors.grey,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          child: Text(
-            viewModel.selectedLectureIndex != null ? '다음' : '다시 만들래요',
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
+          size: AppButtonSize.large,
+          style: hasSelection ? AppButtonStyle.filled : AppButtonStyle.outlined,
+          text: hasSelection ? "다음" : '다시 만들래요',
         ),
       ),
     );
   }
 }
-
-
-
-
