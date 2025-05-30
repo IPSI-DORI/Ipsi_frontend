@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import '../widgets/calendar_widget.dart';
 import '../widgets/schedule_list_widget.dart';
 import '../viewmodels/todolist_view_model.dart';
@@ -14,6 +15,7 @@ class _CurriculumScreenState extends State<TodolistScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(title: const Text("커리큘럼"), centerTitle: true),
       body: Column(
         children: [
