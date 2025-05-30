@@ -21,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeMainView(),
     ChatScreen(),
     CurriculumDefaultScreen(),
-    CurriculumDone(),
     MyPageScreen()
   ];
 
