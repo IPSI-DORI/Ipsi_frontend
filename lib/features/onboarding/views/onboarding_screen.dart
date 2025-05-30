@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/bottombar/onboarding_bottombar.dart';
+import 'package:ipsi_frontend/core/components/onboarding_bottombar.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/features/signup/views/signup_screen.dart';
 import '../../../core/constants/app_colors.dart';

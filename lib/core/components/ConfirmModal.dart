@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../constants/app_colors.dart';
-import '../../constants/app_sizes.dart';
-import '../button/app_button.dart';
+import '../constants/app_colors.dart';
+import '../constants/app_sizes.dart';
+import 'app_button.dart';
 
 class ConfirmModal extends StatelessWidget {
   final String title;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/components/header/title_header.dart';
-import 'package:ipsi_frontend/core/components/modal/ConfirmModal.dart';
+import 'package:ipsi_frontend/core/components/ConfirmModal.dart';
 import 'package:ipsi_frontend/core/components/text/text_icon_field.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
@@ -9,7 +9,7 @@ import 'package:ipsi_frontend/features/mypage/views/alertScreen.dart';
 import 'package:ipsi_frontend/features/mypage/views/noticeScreen.dart';
 import 'package:ipsi_frontend/features/mypage/views/profile_screen.dart';
 import 'package:ipsi_frontend/features/onboarding/views/onboarding_screen.dart';
-import '../../../core/components/button/app_button.dart';
+import '../../../core/components/app_button.dart';
 import 'grade/grade_screen.dart';
 
 class MyPageScreen extends StatefulWidget {

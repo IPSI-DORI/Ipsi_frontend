@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/button/app_button.dart';
+import 'package:ipsi_frontend/core/components/app_button.dart';
 import 'package:ipsi_frontend/features/home/views/home_screen.dart';
 import '../../../core/theme/text_theme.dart';
 
