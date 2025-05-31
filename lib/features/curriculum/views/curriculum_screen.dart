@@ -175,19 +175,22 @@ class _OnboardingViewState extends State<CurriculumScreen> {
       'title': '[2025 수능완성] 수학 + 미적분 - 남치열 미적분(실전편)',
       'price': '무료',
       'name': '남치열',
-      'time': '65분(5강)'
+      'time': '65분(5강)',
+      'progress': 0.8,
     },
     {
       'title': '2026 현우진의 드릴 - 미적분(선택)',
       'price': '유료',
       'name': '현우진',
-      'time': '60분(10강)'
+      'time': '60분(10강)',
+      'progress': 0.5,  
     },
     {
       'title': '[미적분] 2026 김기현의 Connection',
       'price': '유료',
       'name': '김기현',
-      'time': '60분(19강)'
+      'time': '60분(19강)',
+      'progress': 0.3,
     }
   ];
 
@@ -207,35 +210,36 @@ class _OnboardingViewState extends State<CurriculumScreen> {
             backgroundColor: AppColors.white,
             body: SafeArea(
               child: Column(
-                children: [
-                  _buildHeader(viewModel),
-                  Expanded(
-                    child: PageView.builder(
-                      controller: _pageController,
-                      itemCount: 5,
-                      physics: const NeverScrollableScrollPhysics(),
-                      onPageChanged: viewModel.setCurrentPage,
-                      itemBuilder: (context, index) {
-                        if (index == 0) {
-                          return _buildSubjectPage(context, 0, viewModel);
-                        } else if (index == 1) {
-                          return _buildTimeAndDayPage(context, viewModel);
-                        } else if (index == 2) {
-                          return _buildExamScoresPage(context, viewModel);
-                        } else if (index == 3) {
-                          return _buildSurveyPage(context, viewModel);
-                        } else if (index == 4) {
-                          return _buildLecturePage(context, viewModel);
-                        } else {
-                          return const SizedBox.shrink();
-                        }
-                      },
-                    ),
-                  ),
-                  viewModel.currentPage < 4
-                      ? _buildNextButton(viewModel)
-                      : _buildLastButton(viewModel),
-                ],
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(viewModel),
+                Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: 5,
+                  physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: viewModel.setCurrentPage,
+                  itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return _buildSubjectPage(context, 0, viewModel);
+                  } else if (index == 1) {
+                    return _buildTimeAndDayPage(context, viewModel);
+                  } else if (index == 2) {
+                    return _buildExamScoresPage(context, viewModel);
+                  } else if (index == 3) {
+                    return _buildSurveyPage(context, viewModel);
+                  } else if (index == 4) {
+                    return _buildLecturePage(context, viewModel);
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                  },
+                ),
+                ),
+                viewModel.currentPage < 4
+                  ? _buildNextButton(viewModel)
+                  : _buildLastButton(viewModel),
+              ],
               ),
             ),
           );
@@ -245,27 +249,62 @@ class _OnboardingViewState extends State<CurriculumScreen> {
   }
 
   Widget _buildHeader(CurriculumViewModel viewModel) {
-    String headerText;
+    TextSpan headerSpan;
+
     switch (viewModel.currentPage) {
       case 0:
-        headerText = '커리큘럼 과목을 알려주세요';
+        headerSpan = const TextSpan(
+          children: [
+            TextSpan(text: '커리큘럼 ', style: TextStyle(color: Colors.black)),
+            TextSpan(text: '과목', style: TextStyle(color: AppColors.primary)),
+            TextSpan(text: '을 알려주세요', style: TextStyle(color: Colors.black)),
+          ],
+        );
         break;
       case 1:
-        headerText = '커리큘럼 공부 시간과 요일을 정해주세요';
+        headerSpan = const TextSpan(
+          children: [
+            TextSpan(text: '커리큘럼 ', style: TextStyle(color: Colors.black)),
+            TextSpan(text: '공부 시간', style: TextStyle(color: AppColors.primary)),
+            TextSpan(text: '과 ', style: TextStyle(color: Colors.black)),
+            TextSpan(text: '요일', style: TextStyle(color: AppColors.primary)),
+            TextSpan(text: '을 정해주세요', style: TextStyle(color: Colors.black)),
+          ],
+        );
         break;
       case 2:
-        headerText = '최근 모의고사 성적을 입력해주세요';
+        headerSpan = const TextSpan(
+          children: [
+            TextSpan(text: '최근 ', style: TextStyle(color: Colors.black)),
+            TextSpan(text: '모의고사/수능 성적', style: TextStyle(color: AppColors.primary)),
+            TextSpan(text: '을 입력해주세요', style: TextStyle(color: Colors.black)),
+          ],
+        );
         break;
       case 3:
-        headerText = '간단한 설문조사에 응답해주세요';
+        headerSpan = const TextSpan(
+          children: [
+            TextSpan(text: '학습 관련 ', style: TextStyle(color: Colors.black)),
+            TextSpan(text: '설문조사', style: TextStyle(color: AppColors.primary)),
+            TextSpan(text: '에 참여해주세요', style: TextStyle(color: Colors.black)),
+          ],
+        );
         break;
       case 4:
-        headerText = '듣고싶은 맞춤 강의를 선택해주세요';
+        headerSpan = const TextSpan(
+          children: [
+            TextSpan(text: '듣고싶은 ', style: TextStyle(color: Colors.black)),
+            TextSpan(text: '맞춤 강의', style: TextStyle(color: AppColors.primary)),
+            TextSpan(text: '를 선택해주세요', style: TextStyle(color: Colors.black)),
+          ],
+        );
+        break;
       default:
-        headerText = '';
+        headerSpan = const TextSpan(text: '');
     }
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -305,11 +344,14 @@ class _OnboardingViewState extends State<CurriculumScreen> {
             ],
           ),
         ),
-        Text(
-          headerText,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: RichText(
+            textAlign: TextAlign.left,
+            text: TextSpan(
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold), // 글자 크게
+              children: headerSpan.children,
+            ),
           ),
         ),
         const SizedBox(height: 20),
@@ -357,10 +399,10 @@ class _OnboardingViewState extends State<CurriculumScreen> {
             context,
             pageIndex,
             viewModel.selectedSubjects[pageIndex].isEmpty
-                ? []
-                : _subjectOptions[pageIndex]
-                        [viewModel.selectedSubjects[pageIndex]] ??
-                    [],
+          ? []
+          : _subjectOptions[pageIndex]
+            [viewModel.selectedSubjects[pageIndex]] ??
+              [],
             viewModel.selectedDetailSubjects[pageIndex],
             (value) => viewModel.setDetailSubject(pageIndex, value),
             '원하시는 선택과목을 선택해주세요',
@@ -408,7 +450,7 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                 "(중복 가능)",
                 style: TextStyle(
                   fontSize: 14,
-                  color: AppColors.gray600,
+                  color: AppColors.primary,
                 ),
               ),
             ],
@@ -537,103 +579,130 @@ class _OnboardingViewState extends State<CurriculumScreen> {
                   setState(() {}); // UI 갱신
                 },
                 child: Card(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  side: isSelected
-                      ? BorderSide(color: AppColors.primary, width: 1)
-                      : BorderSide(color: AppColors.gray200, width: 1),
-                ),
-                color: isSelected ? AppColors.primary3 : AppColors.gray0,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 도넛 그래프
-                      DonutChart(
-                        progress: lectureData['progress'] ?? 0.0, // 진행률 데이터
-                        size: 80.0,
-                        progressColor: AppColors.primary, // 또는 원하는 색상
-                        backgroundColor: AppColors.gray300,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: isSelected
+                        ? BorderSide(color: AppColors.primary, width: 1)
+                        : BorderSide(color: AppColors.gray200, width: 1),
+                  ),
+                  color: isSelected ? AppColors.primary3 : AppColors.gray0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                        // 제목과 X 버튼
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              '${((lectureData['progress'] ?? 0.0) * 100).toInt()}%',
-                              style: appTextTheme.labelSmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                          DonutChart(
+                            progress: lectureData['progress'] ?? 0.0,
+                            size: 60.0, // 크기를 더 작게
+                            progressColor: AppColors.primary,
+                            backgroundColor: AppColors.gray300,
+                            child: Text(
+                            '${((lectureData['progress'] ?? 0.0) * 100).toInt()}%',
+                            style: appTextTheme.labelSmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12, // 폰트 크기 조정
                             ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: AppSizes.paddingM), // 간격 조정
-                      
-                      // 기존 컬럼 내용
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              lectureData['title'],
-                              style: appTextTheme.titleMedium,
                             ),
-                            const SizedBox(height: AppSizes.padding3XS),
-                            Row(
+                          ),
+                          const SizedBox(height: 20),
+                            Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                              Text(
+                                lectureData['title'],
+                                style: appTextTheme.titleMedium,
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                children: [
                                 Text(lectureData['price']),
                                 const SizedBox(width: AppSizes.padding3XS),
                                 Text("|",
-                                    style: appTextTheme.bodySmall
-                                        ?.copyWith(color: AppColors.gray500)),
+                                  style: appTextTheme.bodySmall
+                                    ?.copyWith(color: AppColors.gray500)),
                                 const SizedBox(width: AppSizes.padding3XS),
                                 Text('${lectureData['name']}'),
                                 const SizedBox(width: AppSizes.padding3XS),
                                 Text("|",
-                                    style: appTextTheme.bodySmall
-                                        ?.copyWith(color: AppColors.gray500)),
+                                  style: appTextTheme.bodySmall
+                                    ?.copyWith(color: AppColors.gray500)),
                                 const SizedBox(width: AppSizes.padding3XS),
                                 Text('${lectureData['time']}'),
+                                ],
+                              ),
                               ],
                             ),
-                            const SizedBox(height: 12),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: AppButton(
-                                onPressed: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: (context) => LectureDetailModal(
-                                      lectureData: lectureData,
-                                      onNext: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CurriculumCreatingScreen()),
-                                        );
-                                      },
-                                      onRestart: () {
-                                        _regenerateLectures(context, viewModel);
-                                      },
-                                    ),
-                                  );
-                                },
-                                size: AppButtonSize.medium,
-                                style: AppButtonStyle.outlined,
-                                text: '상세보기',
-                              ),
                             ),
+                        const SizedBox(height: 16),
+                          GestureDetector(
+                            onTap: () {
+                            setState(() {
+                              _lectureContent.removeAt(idx);
+                            });
+                            // 선택된 인덱스 조정
+                            if (viewModel.selectedLectureIndex! >= _lectureContent.length) {
+                              viewModel.setSelectedLecture(_lectureContent.length - 1);
+                            }
+                            },
+                            child: Container(
+                            padding: const EdgeInsets.all(4),
+                            child: Icon(
+                              Icons.close,
+                              size: 20,
+                              color: AppColors.gray500,
+                            ),
+                            ),
+                          ),
                           ],
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: AppSizes.padding3XS),
+                        // 진행률과 상세보기 버튼을 가로로 배치
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                          // 상세보기 버튼
+                          SizedBox(
+                            height: 48,
+                            width: 300, // 버튼 너비를 줄임 (예: 64px)
+                            child: AppButton(
+                            onPressed: () {
+                              showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (context) => LectureDetailModal(
+                                lectureData: lectureData,
+                                onNext: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                      CurriculumCreatingScreen()),
+                                );
+                                },
+                                onRestart: () {
+                                _regenerateLectures(context, viewModel);
+                                },
+                              ),
+                              );
+                            },
+                            size: AppButtonSize.small, // 버튼 크기를 작게
+                            style: AppButtonStyle.outlined,
+                            text: '상세보기',
+                            ),
+                          ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
               );
             }).toList(),
           ],
