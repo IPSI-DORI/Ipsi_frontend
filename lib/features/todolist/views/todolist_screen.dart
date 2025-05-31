@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/constants/app_colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TodolistScreen extends StatefulWidget {
   @override
@@ -11,22 +11,52 @@ class _TodolistScreenState extends State<TodolistScreen> {
   late PageController pageController;
   int currentMonthIndex = DateTime.now().month - 1; // 0-based index
 
-  // 완료도별 색상 정의
-  final Map<String, Color> completionColors = {
-    '0-30%': Color(0xFFE4F9F7),
-    '-70%': Color(0xFFB4F2EC),
-    '-100%': Color(0xFF43D4D2),
+  // 완료도별 SVG 아이콘 경로 정의
+  final Map<String, String> completionSvgs = {
+    '0-30%': 'assets/svg/check_30.svg',
+    '-70%': 'assets/svg/check_70.svg',
+    '-100%': 'assets/svg/check_100.svg',
   };
+
+  // 더미 강의 데이터
+  final List<Map<String, dynamic>> lectureData = [
+    {
+      'title': '현대문학의 이해와 분석',
+      'type': '무료',
+      'instructor': '김현수',
+      'duration': '45분',
+      'key': 'lecture_0',
+    },
+    {
+      'title': '고전문학 작품 해석',
+      'type': '유료',
+      'instructor': '박민정',
+      'duration': '38분',
+      'key': 'lecture_1',
+    },
+    {
+      'title': '문법의 기초와 활용',
+      'type': '무료',
+      'instructor': '이서영',
+      'duration': '52분',
+      'key': 'lecture_2',
+    },
+    {
+      'title': '독해력 향상 전략',
+      'type': '유료',
+      'instructor': '최준호',
+      'duration': '41분',
+      'key': 'lecture_3',
+    },
+  ];
 
   // 체크박스 상태 관리
   Map<String, bool> scheduleCheckStates = {
-    "강의명_0": false,
-    "강의명_1": false,
-    "강의명_2": false,
+    "lecture_0": false,
+    "lecture_1": false,
+    "lecture_2": false,
+    "lecture_3": false,
   };
-
-  // 날짜별 체크박스 상태 관리
-  Map<String, bool> dateCheckStates = {};
 
   // 샘플 데이터 - 월별, 날짜별 완료도
   final Map<int, Map<int, String>> monthlyCompletionMap = {
@@ -85,116 +115,137 @@ class _TodolistScreenState extends State<TodolistScreen> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 제목
-          Padding(
-            padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-            child: Text(
-              "국어 강의명",
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 제목
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 4),
+              child: Text(
+              "국어 완전정복 패키지",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
+              ),
             ),
-          ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: Text(
+              "무료 | 남치열 | 176분(4강)",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey,
+                fontWeight: FontWeight.w400,
+              ),
+              ),
+            ),
 
-          // 범례
-          Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-            child: Row(
-              children: [
-                Text("범례", style: TextStyle(fontSize: 14, color: Colors.grey[600])),
-                SizedBox(width: 20),
-                _buildLegendItem("0-30%", completionColors['0-30%']!),
-                SizedBox(width: 15),
-                _buildLegendItem("-70%", completionColors['-70%']!),
-                SizedBox(width: 15),
-                _buildLegendItem("-100%", completionColors['-100%']!),
-              ],
-            ),
-          ),
+            // 달력
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withAlpha((0.1 * 255).toInt()),
+                    blurRadius: 10,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  // 월 표시와 범례를 같은 행에 배치
+                    Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                      // 월 이동 버튼과 월 표시
+                      Row(
+                        children: [
+                        Text(
+                          "2025년 ${currentMonthIndex + 1}월",
+                          style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                          ),
+                        ),
+                        ],
+                      ),
+                      // 범례
+                      Row(
+                        children: [
+                        _buildLegendItem("assets/svg/check_30.svg"),
+                        SizedBox(width: 4),
+                        Text("0~30%", style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                        SizedBox(width: 12),
+                        _buildLegendItem("assets/svg/check_70.svg"),
+                        SizedBox(width: 4),
+                        Text("~70%", style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                        SizedBox(width: 12),
+                        _buildLegendItem("assets/svg/check_100.svg"),
+                        SizedBox(width: 4),
+                        Text("100%", style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                        ],
+                      ),
+                      ],
+                    ),
+                    ),
 
-          // 달력
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                // 월 표시
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    "2025년 ${currentMonthIndex + 1}월",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
+                  // 요일 헤더
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: ['일', '월', '화', '수', '목', '금', '토']
+                        .map((day) => SizedBox(
+                              width: 35,
+                              child: Text(
+                                day,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ),
+
+                  SizedBox(height: 15),
+
+                  // 달력 PageView
+                  SizedBox(
+                    height: 400,
+                    child: PageView.builder(
+                      controller: pageController,
+                      onPageChanged: (index) {
+                        setState(() {
+                          currentMonthIndex = index;
+                          selectedDate = DateTime(2025, index + 1, 1);
+                        });
+                      },
+                      itemCount: 12,
+                      itemBuilder: (context, index) {
+                        return _buildMonthCalendar(index + 1);
+                      },
                     ),
                   ),
-                ),
-
-                // 요일 헤더
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: ['일', '월', '화', '수', '목', '금', '토']
-                      .map((day) => Container(
-                            width: 35,
-                            child: Text(
-                              day,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                          ))
-                      .toList(),
-                ),
-
-                SizedBox(height: 15),
-
-                // 달력 PageView
-                Container(
-                  height: 280,
-                  child: PageView.builder(
-                    controller: pageController,
-                    onPageChanged: (index) {
-                      setState(() {
-                        currentMonthIndex = index;
-                        selectedDate = DateTime(2025, index + 1, 1);
-                      });
-                    },
-                    itemCount: 12,
-                    itemBuilder: (context, index) {
-                      return _buildMonthCalendar(index + 1);
-                    },
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
-          SizedBox(height: 30),
+            SizedBox(height: 30),
 
-          // 일정 목록
-          Expanded(
-            child: Container(
-              width: double.infinity,
+            // 일정 목록
+            Padding(
               padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,41 +259,39 @@ class _TodolistScreenState extends State<TodolistScreen> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        _buildScheduleItem("강의명", "강의명_0"),
-                        _buildScheduleItem("강의명", "강의명_1"),
-                        _buildScheduleItem("강의명", "강의명_2"),
-                      ],
-                    ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: lectureData.length,
+                    itemBuilder: (context, index) {
+                      final lecture = lectureData[index];
+                      return _buildScheduleItem(
+                        lecture['title'],
+                        lecture['type'],
+                        lecture['instructor'],
+                        lecture['duration'],
+                        lecture['key'],
+                      );
+                    },
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildLegendItem(String label, Color color) {
-    return Row(
-      children: [
-        Container(
-          width: 12,
-          height: 12,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        SizedBox(width: 5),
-        Text(
-          label,
-          style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-        ),
-      ],
+  Widget _buildLegendItem(String svgPath) {
+    return Container(
+      width: 16,
+      height: 16,
+      child: SvgPicture.asset(
+        svgPath,
+        width: 16,
+        height: 16,
+      ),
     );
   }
 
@@ -250,29 +299,42 @@ class _TodolistScreenState extends State<TodolistScreen> {
     final firstDayOfMonth = DateTime(2025, month, 1);
     final lastDayOfMonth = DateTime(2025, month + 1, 0);
     final startOfCalendar = firstDayOfMonth.subtract(Duration(days: firstDayOfMonth.weekday % 7));
-    
+
     List<Widget> calendarDays = [];
-    
+
     for (int i = 0; i < 42; i++) {
       final date = startOfCalendar.add(Duration(days: i));
       final isCurrentMonth = date.month == month;
       final dayNumber = date.day;
-      
-      String dateKey = "${month}_${dayNumber}";
-      bool isDateChecked = dateCheckStates[dateKey] ?? false;
-      
-      Color? backgroundColor;
+
+      // SVG와 배경 결정
+      Widget? svgWidget;
+      Color backgroundColor = Colors.grey[200]!; // 기본 회색 배경
+
       if (isCurrentMonth) {
-        if (isDateChecked) {
-          backgroundColor = Color(0xFF43D4D2); // 체크된 경우 초록색
-        } else if (monthlyCompletionMap[month] != null && 
-                   monthlyCompletionMap[month]!.containsKey(dayNumber)) {
-          backgroundColor = completionColors[monthlyCompletionMap[month]![dayNumber]];
+        backgroundColor = Colors.white; // 항상 흰색 배경
+        if (monthlyCompletionMap[month] != null &&
+            monthlyCompletionMap[month]!.containsKey(dayNumber)) {
+          // 완료도에 따른 SVG 표시
+          String completionLevel = monthlyCompletionMap[month]![dayNumber]!;
+          svgWidget = SvgPicture.asset(
+            completionSvgs[completionLevel]!,
+            width: 20,
+            height: 20,
+          );
         } else {
-          backgroundColor = Colors.grey[200]; // 기본 회색
+          // SVG가 없을 때 회색 네모
+          svgWidget = Container(
+            width: 20,
+            height: 20,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(4),
+            ),
+          );
         }
       }
-      
+
       calendarDays.add(
         GestureDetector(
           onTap: () {
@@ -284,61 +346,36 @@ class _TodolistScreenState extends State<TodolistScreen> {
           },
           child: Container(
             width: 35,
-            height: 35,
+            height: 48, // 기존 35에서 48로 높이 증가
             margin: EdgeInsets.all(2),
             decoration: BoxDecoration(
-              color: backgroundColor ?? Colors.grey[100],
+              color: isCurrentMonth ? backgroundColor : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
+              border: selectedDate.day == dayNumber && selectedDate.month == month
+                  ? Border.all(color: Color(0xFF43D4D2), width: 2)
+                  : null,
             ),
-            child: Stack(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(
-                  child: Text(
-                    '$dayNumber',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: isCurrentMonth 
-                          ? (isDateChecked ? Colors.white : Colors.black)
-                          : Colors.grey[400],
+                if (svgWidget != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 2), // 공간 확보를 위해 패딩 약간만
+                    child: SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: svgWidget,
                     ),
+                  ),
+                SizedBox(height: 4), // SVG와 날짜 사이 공간 확보 (기존 2에서 4로)
+                Text(
+                  '$dayNumber',
+                  style: TextStyle(
+                    fontSize: 12, // 날짜 글자 크기 약간 키움
+                    fontWeight: FontWeight.w500,
+                    color: isCurrentMonth ? Colors.black : Colors.grey[400],
                   ),
                 ),
-                if (isCurrentMonth && isDateChecked)
-                  Positioned(
-                    top: 2,
-                    right: 2,
-                    child: Container(
-                      width: 12,
-                      height: 12,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.9),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Icon(
-                        Icons.check,
-                        size: 8,
-                        color: Color(0xFF43D4D2),
-                      ),
-                    ),
-                  ),
-                // 전체 영역을 클릭 가능하게 만들기 위한 투명 오버레이
-                if (isCurrentMonth)
-                  Positioned.fill(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          dateCheckStates[dateKey] = !isDateChecked;
-                        });
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                  ),
               ],
             ),
           ),
@@ -366,7 +403,7 @@ class _TodolistScreenState extends State<TodolistScreen> {
     return weekdays[weekday];
   }
 
-  Widget _buildScheduleItem(String title, String key) {
+  Widget _buildScheduleItem(String title, String type, String instructor, String duration, String key) {
     bool isChecked = scheduleCheckStates[key] ?? false;
 
     return Container(
@@ -406,13 +443,29 @@ class _TodolistScreenState extends State<TodolistScreen> {
             ),
           ),
           SizedBox(width: 12),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              decoration: isChecked ? TextDecoration.lineThrough : null,
-              decorationColor: Colors.grey[500],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    decoration: isChecked ? TextDecoration.lineThrough : null,
+                    decorationColor: Colors.grey[500],
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  "$type | $instructor | $duration",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ],
             ),
           ),
         ],

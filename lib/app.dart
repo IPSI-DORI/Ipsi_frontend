@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
         ),
       title: '입시도리',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.auth,
+      initialRoute: AppRoutes.todolist,
       routes: AppRoutes.routes,
     );
   }
