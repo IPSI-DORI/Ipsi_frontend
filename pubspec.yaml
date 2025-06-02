@@ -24,6 +24,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/json/university.json
     - assets/svg/check_30.svg
     - assets/svg/check_70.svg
     - assets/svg/check_100.svg
