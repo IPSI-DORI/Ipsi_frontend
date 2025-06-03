@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/header/back_title_header.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
-
-import '../../../core/components/text/NoticeContent.dart';
+import '../../../core/ui/components/text/noticeContent.dart';
+import '../../../core/ui/components/header/back_title_header.dart';
 
 class Noticescreen extends StatefulWidget {
   const Noticescreen({super.key});

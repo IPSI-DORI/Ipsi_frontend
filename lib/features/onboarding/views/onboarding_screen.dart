@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/onboarding_bottombar.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/features/signup/views/signup_screen.dart';
 import '../../../core/constants/app_colors.dart';
+import '../../../core/ui/components/onboarding_bottombar.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

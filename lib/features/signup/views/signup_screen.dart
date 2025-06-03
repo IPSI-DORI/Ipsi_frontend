@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/app_button.dart';
-import 'package:ipsi_frontend/core/components/header/signup_header.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/features/signup/views/signup_result_screen.dart';
 import 'package:ipsi_frontend/features/signup/views/step/signup_step1_info.dart';
 import 'package:ipsi_frontend/features/signup/views/step/signup_step2_exam.dart';
 import 'package:ipsi_frontend/features/signup/views/step/signup_step3_goal.dart';
 import 'package:ipsi_frontend/features/signup/views/step/signup_step4_style.dart';
+
+import '../../../core/ui/components/app_button.dart';
+import '../../../core/ui/components/header/signup_header.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

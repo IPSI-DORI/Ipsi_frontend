@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/features/chatbot/views/chat_screen.dart';
 import 'package:ipsi_frontend/features/curriculum/views/curriculum_default_screen.dart';
-import 'package:ipsi_frontend/features/curriculum/views/curriculum_done_Screen.dart';
-import 'package:ipsi_frontend/features/curriculum/views/curriculum_screen.dart';
 import 'package:ipsi_frontend/features/home/views/home_main_view.dart';
 import 'package:ipsi_frontend/features/mypage/views/mypage_screen.dart';
-import '../../../core/widgets/custom_bottom_navigation.dart';
+
+import '../../../core/ui/widgets/custom_bottom_navigation.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

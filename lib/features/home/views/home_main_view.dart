@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/header/home_header.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
 import 'package:ipsi_frontend/features/chatbot/views/chat_screen.dart';
 import 'package:ipsi_frontend/features/curriculum/views/curriculum_screen.dart';
 import 'package:ipsi_frontend/features/home/views/action_button_card.dart';
 import 'package:ipsi_frontend/features/home/views/stats_card.dart';
+import '../../../core/ui/components/header/home_header.dart';
 
 class HomeMainView extends StatefulWidget {
   const HomeMainView({super.key});

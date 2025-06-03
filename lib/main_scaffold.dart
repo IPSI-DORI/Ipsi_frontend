@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/features/curriculum/views/curriculum_default_screen.dart';
 import 'package:ipsi_frontend/features/home/views/home_screen.dart';
-import './core/widgets/custom_bottom_navigation.dart';
 import './features/chatbot/views/chat_screen.dart';
+import 'core/ui/widgets/custom_bottom_navigation.dart';
 import 'features/curriculum/views/curriculum_screen.dart';
 import './features/mypage/views//mypage_screen.dart';
 

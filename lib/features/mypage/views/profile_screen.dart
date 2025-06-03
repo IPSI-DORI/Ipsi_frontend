@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/app_button.dart';
-import 'package:ipsi_frontend/core/components/header/back_title_header.dart';
-import 'package:ipsi_frontend/core/components/text/app_dropdown.dart';
-import 'package:ipsi_frontend/core/components/text/app_text_field.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
+import 'package:ipsi_frontend/core/utils/json_loader.dart';
 import 'package:ipsi_frontend/features/mypage/views/mypage_screen.dart';
+import '../../../core/ui/components/app_button.dart';
+import '../../../core/ui/components/header/back_title_header.dart';
+import '../../../core/ui/components/text/app_dropdown.dart';
+import '../../../core/ui/components/text/app_text_field.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final String? selectedSchool;
+  final String? selectedMajor;
+  final Function(String?) onSchoolChanged;
+  final Function(String?) onMajorchanged;
+
+  const ProfileScreen(
+      {super.key,
+      this.selectedSchool,
+      this.selectedMajor,
+      required this.onSchoolChanged,
+      required this.onMajorchanged});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -26,6 +37,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   // 전공 셀렉트 선언
   String? selectedMajor;
+
+  // 학교 셀렉트 선언
+  Map<String, List<String>> universityMajorMap = {};
+  List<String> universityList = [];
+  List<String> majorList = [];
 
   // 폼이 채워졌는지를 확인하는 리턴값이 bool인 함수
   bool get isFormFiled {
@@ -47,6 +63,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     // TextFild의 값이 바뀔 떄마다 addLister 콜백 함수가 updateState 함수 호출
     nicknameController.addListener(updateState);
+    loadUniversityMajorMap().then((map) {
+      universityMajorMap = map;
+      universityList = map.keys.toList();
+    });
   }
 
   // TextEditingController는 Stateful한 객체이므로 수동으로 메모리 해제
@@ -56,8 +76,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     nicknameController.dispose();
     super.dispose();
   }
-
-
 
   // UI
   @override
@@ -94,27 +112,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     AppDropdown(
                       title: "희망 대학교",
-                      items: ['서울대학교', '연세대학교', '고려대학교', '서강대', '성균관대', '한양대'],
+                      items: universityList,
                       hint: "새로운 목표 대학교를 선택해주세요",
-                      onChanged: (val) {
-                        selectedUniversity = val;
-                        updateState();
+                      value: widget.selectedSchool,
+                      onChanged: (school) {
+                        final majors = universityMajorMap[school] ?? [];
+                        setState(() {
+                          majorList = majors;
+                        });
+                        widget.onSchoolChanged(school);
                       },
                       hintText: '',
                     ),
                     AppDropdown(
                       title: "희망 전공",
-                      items: [
-                        '컴퓨터공학과',
-                        '소프트웨어공학과',
-                        '정보통신공학과',
-                        '인공지능학과',
-                      ],
+                      items: majorList,
                       hint: "새로운 목표 전공을 입력해주세요",
-                      onChanged: (val) {
-                        selectedMajor = val;
-                        updateState();
-                      },
+                      value: widget.selectedMajor,
+                      onChanged: widget.onMajorchanged,
                       hintText: '',
                     ),
                   ]) // 버튼과 간격

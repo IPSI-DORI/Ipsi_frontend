@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
 import 'package:ipsi_frontend/features/onboarding/views/onboarding_screen.dart';
-import '../../../core/widgets/loading_spinner.dart';
+
+import '../../../core/ui/widgets/loading_spinner.dart';
 
 
 // 상태 변화를 관리하는 StatefuleWidget을 확장한 SplashScreen 화면 선언

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../constants/app_sizes.dart';
-import '../../theme/text_theme.dart';
+import '../../../constants/app_sizes.dart';
+import '../../../theme/text_theme.dart';
 
 class HomeHeader extends StatelessWidget {
   final String logo;
