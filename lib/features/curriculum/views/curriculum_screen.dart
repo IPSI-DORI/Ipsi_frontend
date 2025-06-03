@@ -1,14 +1,14 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/app_button.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
 import 'package:ipsi_frontend/features/curriculum/views/curriculum_creating_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:ipsi_frontend/core/widgets/DountChart.dart';
+import '../../../core/ui/components/app_button.dart';
+import '../../../core/ui/widgets/DountChart.dart';
+import '../../../core/ui/widgets/lecture_detail_modal.dart';
 import '../viewmodels/curriculum_view_model.dart';
-import '../../../core/widgets/lecture_detail_modal.dart';
 
 class CurriculumScreen extends StatefulWidget {
   final VoidCallback? onNext;

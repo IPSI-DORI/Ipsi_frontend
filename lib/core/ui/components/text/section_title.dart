@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../../theme/text_theme.dart';
+import '../../../theme/text_theme.dart';
 
 // 회원가입과 커리큘럼 생성 시 쓰이는 커스텀 타이틀
 class SectionTitle extends StatelessWidget {

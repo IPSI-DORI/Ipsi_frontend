@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
-import '../../features/chatbot/models/message_model.dart';
+import '../../../features/chatbot/models/message_model.dart';
 
 class MessageBubble extends StatelessWidget {
   final Message message;

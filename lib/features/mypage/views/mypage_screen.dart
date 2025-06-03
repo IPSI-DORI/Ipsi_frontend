@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/header/title_header.dart';
-import 'package:ipsi_frontend/core/components/ConfirmModal.dart';
-import 'package:ipsi_frontend/core/components/text/text_icon_field.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
@@ -9,10 +6,14 @@ import 'package:ipsi_frontend/features/mypage/views/alertScreen.dart';
 import 'package:ipsi_frontend/features/mypage/views/noticeScreen.dart';
 import 'package:ipsi_frontend/features/mypage/views/profile_screen.dart';
 import 'package:ipsi_frontend/features/onboarding/views/onboarding_screen.dart';
-import '../../../core/components/app_button.dart';
+import '../../../core/ui/components/ConfirmModal.dart';
+import '../../../core/ui/components/app_button.dart';
+import '../../../core/ui/components/header/title_header.dart';
+import '../../../core/ui/components/text/text_icon_field.dart';
 import 'grade/grade_screen.dart';
 
 class MyPageScreen extends StatefulWidget {
+
   const MyPageScreen({super.key});
 
   @override
@@ -48,7 +49,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => ProfileScreen(
+                            onSchoolChanged: (String) {},
+                            onMajorchanged: (String) {},
+                          )),
                 );
               },
               child: Row(

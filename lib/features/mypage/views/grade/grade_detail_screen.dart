@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/app_button.dart';
-import 'package:ipsi_frontend/core/components/header/back_title_header.dart';
-import 'package:ipsi_frontend/core/components/text/app_text_field.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
+import '../../../../core/ui/components/app_button.dart';
+import '../../../../core/ui/components/header/back_title_header.dart';
+import '../../../../core/ui/components/text/app_text_field.dart';
 import 'grade_screen.dart';
 
 class GradeDetailScreen extends StatefulWidget {

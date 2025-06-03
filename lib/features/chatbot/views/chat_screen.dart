@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:provider/provider.dart';
+import '../../../core/ui/widgets/message_bubble.dart';
+import '../../../core/ui/widgets/option_button.dart';
 import '../viewmodels/chat_view_model.dart';
 import '../models/message_model.dart';
 import 'package:intl/intl.dart';
-import '../../../core/widgets/message_bubble.dart';
-import '../../../core/widgets/option_button.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);

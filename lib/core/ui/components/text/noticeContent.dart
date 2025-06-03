@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
-
-import '../../constants/app_colors.dart';
+import '../../../constants/app_colors.dart';
 
 class NoticeContent extends StatefulWidget {
   final String title;

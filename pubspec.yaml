@@ -25,6 +25,10 @@ flutter:
 
   assets:
     - assets/json/university.json
+    - assets/images/mockup/home_onboarding.png
+    - assets/images/mockup/chatbot_onboarding.png
+    - assets/images/mockup/curriculum_onboarding.png
+    - assets/images/mockup/todolist_onboarding.png
     - assets/svg/check_30.svg
     - assets/svg/check_70.svg
     - assets/svg/check_100.svg

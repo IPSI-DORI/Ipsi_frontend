@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/app_button.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/core/theme/text_theme.dart';
+import '../../../core/ui/components/app_button.dart';
 import '../../todolist/views/todolist_screen.dart';
 
 class CurriculumDone extends StatelessWidget {

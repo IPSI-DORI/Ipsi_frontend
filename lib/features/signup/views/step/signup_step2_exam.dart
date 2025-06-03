@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/text/app_dropdown.dart';
-import 'package:ipsi_frontend/core/components/text/section_title.dart';
+
+import '../../../../core/ui/components/text/app_dropdown.dart';
+import '../../../../core/ui/components/text/section_title.dart';
 
 class SignupStep2Exam extends StatelessWidget {
   final String? selectedKorean;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 
-import '../constants/app_colors.dart';
+import '../../constants/app_colors.dart';
 
 class CustomSwitch extends StatelessWidget {
   final bool value;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/header/home_header.dart';
-import 'package:ipsi_frontend/core/components/header/title_header.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
+import '../../../core/ui/components/header/title_header.dart';
 
 class CurriculumDefaultScreen extends StatelessWidget {
   const CurriculumDefaultScreen({super.key});

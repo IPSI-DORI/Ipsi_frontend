@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
-import '../../constants/app_colors.dart';
-import '../../theme/text_theme.dart';
+
+import '../../../constants/app_colors.dart';
+import '../../../theme/text_theme.dart';
 
 // 커스텀 셀렉트박스
 class AppDropdown<T> extends StatelessWidget {

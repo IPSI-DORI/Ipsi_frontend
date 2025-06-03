@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/text/app_dropdown.dart';
-import 'package:ipsi_frontend/core/components/text/app_text_field.dart';
-import 'package:ipsi_frontend/core/components/text/section_title.dart';
+import '../../../../core/ui/components/text/app_dropdown.dart';
+import '../../../../core/ui/components/text/section_title.dart';
 
 class SignupStep3Goal extends StatelessWidget {
   final TextEditingController nicknameController;

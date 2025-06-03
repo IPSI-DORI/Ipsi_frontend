@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ipsi_frontend/core/components/onboarding_bottombar.dart';
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/features/signup/views/signup_screen.dart';
 import '../../../core/constants/app_colors.dart';
@@ -12,15 +11,28 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  // 코드로도 스와이프 되도록 하는 컨트롤러
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 
+  final List<String> titles = [
+    "투두리스트 체크 및 진행률 확인",
+    "챗봇과의 질의응답",
+    "맞춤형 강의 추천",
+    "커리큘럼 생성 및 일정 관리",
+  ];
+
   final List<String> messages = [
-    "설문 분석으로 나에게 꼭 맞는 강의를 추천해줘요",
-    "교재 추천부터 상담까지 실시간으로 도와드려요",
-    "선택한 강의로 맞춤 커리큘럼을 관리해보세요",
-    "추천 강의부터 최신 뉴스까지 확인해보세요",
+    "커리큘럼을 기반으로 매일 할일을 알려드려요",
+    "궁금한 사항을 24시간 편하게 물어보세요",
+    "공부 일정과 스타일, 현재 성적에 맞는\n강의를 추천받으세요",
+    "원하는 강의로 커리큘럼을 만들고\n공부 현황을 확인해보세요",
+  ];
+
+  final List<String> imagePaths = [
+    'assets/images/mockup/home_onboarding.png',
+    'assets/images/mockup/chatbot_onboarding.png',
+    'assets/images/mockup/curriculum_onboarding.png',
+    'assets/images/mockup/todolist_onboarding.png',
   ];
 
   void _onPageChanged(int index) {
@@ -35,84 +47,102 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  Widget _buildPage(String text) {
+  Widget _buildPage(String title, String message, String imagePath) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const SizedBox(height: 100),
-        Image.asset('assets/images/characters/dori/level5_dori.png', height: 200),
-        const SizedBox(height: 40),
+        Image.asset(imagePath, height: 420),
+        const SizedBox(height: 24),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: AppSizes.font20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Text(
-            text,
+            message,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: AppSizes.font16, fontWeight: FontWeight.w400),
+            style: const TextStyle(
+              fontSize: AppSizes.font16,
+              fontWeight: FontWeight.w400,
+            ),
           ),
         ),
       ],
     );
   }
 
-  // 바텀바
   Widget _buildBottomBar() {
     if (_currentIndex == messages.length - 1) {
       return Padding(
         padding: const EdgeInsets.all(AppSizes.paddingXL),
         child: SizedBox(
-          width: double.infinity,
-          
-          // 카카오톡 버튼
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SignupScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SignupScreen()));
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.yellow, // 배경색
-              foregroundColor: AppColors.gray800,// 글자색
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizes.radiusM)),
+              backgroundColor: AppColors.yellow,
+              foregroundColor: AppColors.gray800,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSizes.radiusM),
+              ),
+              minimumSize: const Size.fromHeight(56),
             ),
-            // 수평 방향으로 위젯 나란히 배치
             child: Row(
-              // 수평 방향에서 자식들을 가운데 정렬
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                    'assets/images/icon/kakao.png',
-                    width: AppSizes.iconM,
-                    height: AppSizes.iconM),
-                const SizedBox(width: 8), // 간격
-                Text("카카오톡으로 시작하기"),
-              ]
-            )
-
+                  'assets/images/icon/kakao.png',
+                  width: AppSizes.iconM,
+                  height: AppSizes.iconM,
+                ),
+                const SizedBox(width: 8),
+                const Text("카카오톡으로 시작하기"),
+              ],
+            ),
           ),
         ),
       );
     } else {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingL, vertical: AppSizes.paddingM),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSizes.paddingL, vertical: AppSizes.paddingM),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text("건너뛰기", style: TextStyle(color: AppColors.gray300)),
             Row(
               children: List.generate(messages.length, (index) {
-                return Container(
-                  width: 8,
-                  height: 8,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _currentIndex == index ? Colors.teal : AppColors.gray100,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _currentIndex == index
+                          ? Colors.teal
+                          : AppColors.gray100,
+                    ),
                   ),
                 );
               }),
             ),
             TextButton(
               onPressed: () {
-                _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                _pageController.nextPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut);
               },
-              child: const Text("다음", style: TextStyle(color: AppColors.primary)),
+              child: const Text("다음",
+                  style: TextStyle(color: AppColors.primary)),
             ),
           ],
         ),
@@ -131,35 +161,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               controller: _pageController,
               itemCount: messages.length,
               onPageChanged: _onPageChanged,
-              itemBuilder: (_, index) => _buildPage(messages[index]),
+              itemBuilder: (_, index) => _buildPage(
+                titles[index],
+                messages[index],
+                imagePaths[index],
+              ),
             ),
           ),
-
-          // 온보딩 바텀바
-          OnboardingBottomBar(
-              isLastPage: _currentIndex == messages.length - 1,
-              currentIndex: _currentIndex, // _ : private 변수명일 때 사용
-              totalPageCount: messages.length,
-              onSkip: () {
-                _pageController.animateToPage(
-                    messages.length - 1,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut
-                );
-              },
-              onNext: () {
-                _pageController.nextPage(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut
-                );
-              },
-              onkakako: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignupScreen())
-                );
-              }
-          )
+          _buildBottomBar(),
         ],
       ),
     );
