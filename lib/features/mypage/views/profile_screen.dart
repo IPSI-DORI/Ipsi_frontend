@@ -114,13 +114,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       title: "희망 대학교",
                       items: universityList,
                       hint: "새로운 목표 대학교를 선택해주세요",
-                      value: widget.selectedSchool,
+                      value: widget.onSchoolChanged,
                       onChanged: (school) {
                         final majors = universityMajorMap[school] ?? [];
                         setState(() {
                           majorList = majors;
                         });
-                        widget.onSchoolChanged(school);
+                        widget.onSchoolChanged(school as String?);
                       },
                       hintText: '',
                     ),
