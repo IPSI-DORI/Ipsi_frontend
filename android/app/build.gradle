@@ -28,6 +28,11 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        // kakao social login
+        manifestPlaceholders = [
+                kakaoScheme: "kakao<YOUR_NATIVE_APP_KEY>"
+        ]
     }
 
     buildTypes {

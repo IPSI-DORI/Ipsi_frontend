@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
+import 'package:ipsi_frontend/core/constants/app_colors.dart';
 import 'package:ipsi_frontend/features/signup/views/signup_screen.dart';
-import '../../../core/constants/app_colors.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -41,11 +44,52 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     });
   }
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
+  Future<void> _startKakaoLogin() async {
+    try {
+      KakaoSdk.init(nativeAppKey: 'a19586ddd9ab7a34283d45abe1022db1');
+      bool isInstalled = await isKakaoTalkInstalled();
+      debugPrint("카카오톡 설치 여부: $isInstalled");
+
+      OAuthToken token = isInstalled
+          ? await UserApi.instance.loginWithKakaoTalk()
+          : await UserApi.instance.loginWithKakaoAccount();
+
+      debugPrint("카카오 로그인 성공!");
+      debugPrint("카카오 AccessToken: ${token.accessToken}");
+      debugPrint("카카오 RefreshToken: ${token.refreshToken}");
+      User user = await UserApi.instance.me();
+      debugPrint("카카오 사용자 정보: ${user.kakaoAccount?.profile?.nickname}");
+      debugPrint("카카오 사용자 정보: ${user.kakaoAccount?.email}");
+
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('accessToken', token.accessToken);
+      await prefs.setString('refreshToken', token.refreshToken ?? '');
+
+      if (!mounted) return;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const SignupScreen()),
+      );
+    } catch (e, stackTrace) {
+      debugPrint("카카오 로그인 오류: $e");
+      debugPrint("스택 트레이스: $stackTrace");
+
+      if (!mounted) return;
+
+      final errorMessage = e.toString().length > 100
+          ? '${e.toString().substring(0, 100)}...'
+          : e.toString();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('카카오 로그인 실패: $errorMessage'),
+          backgroundColor: Colors.red[400],
+        ),
+      );
+    }
   }
+
 
   Widget _buildPage(String title, String message, String imagePath) {
     return Column(
@@ -83,15 +127,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         padding: const EdgeInsets.all(AppSizes.paddingXL),
         child: SizedBox(
           child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const SignupScreen()));
-            },
+            onPressed: _startKakaoLogin,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.yellow,
               foregroundColor: AppColors.gray800,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSizes.radiusM),
+                borderRadius: BorderRadius.circular(AppSizes.radiusM),
               ),
               minimumSize: const Size.fromHeight(56),
             ),
@@ -148,6 +189,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ),
       );
     }
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
