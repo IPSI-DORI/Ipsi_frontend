@@ -31,7 +31,7 @@ android {
 
         // kakao social login
         manifestPlaceholders = [
-                kakaoScheme: "kakao<YOUR_NATIVE_APP_KEY>"
+                kakaoScheme: "kakaoa19586ddd9ab7a34283d45abe1022db1"
         ]
     }
 
