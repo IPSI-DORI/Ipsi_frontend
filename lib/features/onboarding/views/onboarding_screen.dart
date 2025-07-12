@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:dio/dio.dart';
 
 import 'package:ipsi_frontend/core/constants/app_sizes.dart';
 import 'package:ipsi_frontend/core/constants/app_colors.dart';
@@ -47,49 +48,74 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _startKakaoLogin() async {
     try {
       KakaoSdk.init(nativeAppKey: 'a19586ddd9ab7a34283d45abe1022db1');
-      bool isInstalled = await isKakaoTalkInstalled();
-      debugPrint("카카오톡 설치 여부: $isInstalled");
 
-      OAuthToken token = isInstalled
+      final isInstalled = await isKakaoTalkInstalled();
+      debugPrint("카카오 설치 여부: $isInstalled");
+
+      final token = isInstalled
           ? await UserApi.instance.loginWithKakaoTalk()
           : await UserApi.instance.loginWithKakaoAccount();
 
       debugPrint("카카오 로그인 성공!");
       debugPrint("카카오 AccessToken: ${token.accessToken}");
       debugPrint("카카오 RefreshToken: ${token.refreshToken}");
-      User user = await UserApi.instance.me();
-      debugPrint("카카오 사용자 정보: ${user.kakaoAccount?.profile?.nickname}");
-      debugPrint("카카오 사용자 정보: ${user.kakaoAccount?.email}");
 
+      // 사용자 정보 출력
+      final user = await UserApi.instance.me();
+      debugPrint("카카오 사용자 정보 (이름): ${user.kakaoAccount?.profile?.nickname}");
+      debugPrint("카카오 사용자 정보 (이메일): ${user.kakaoAccount?.email}");
+
+      // 백엔드와 연동
+      await _sendTokenToBackend(token.accessToken);
+
+    } catch (e, stackTrace) {
+      debugPrint("카카오 로그인 실패: $e");
+      debugPrint("스택 트레이스: $stackTrace");
+
+      if (!mounted) return;
+      final msg = e.toString().length > 100 ? '${e.toString().substring(0, 100)}...' : e.toString();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('카카오 로그인 실패: $msg'), backgroundColor: Colors.red[400]),
+      );
+    }
+  }
+
+  Future<void> _sendTokenToBackend(String kakaoAccessToken) async {
+    final dio = Dio();
+    try {
+      // JWT 발급해주는 post API가 필요 -> 준규님 답변 대기중
+      final response = await dio.post(
+        'https://ipsidori.o-r.kr/api/v1/auth/oauth2/kakao',
+        data: {
+          'accessToken': kakaoAccessToken,
+        },
+      );
+
+      final accessToken = response.data['accessToken'];
+      final refreshToken = response.data['refreshToken'];
+
+      debugPrint('카카오 서버 accessToken: $accessToken');
+      debugPrint('카카오 서버 refreshToken: $refreshToken');
 
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('accessToken', token.accessToken);
-      await prefs.setString('refreshToken', token.refreshToken ?? '');
+      await prefs.setString('카카오 accessToken', accessToken);
+      await prefs.setString('카카오 refreshToken', refreshToken);
 
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const SignupScreen()),
       );
-    } catch (e, stackTrace) {
-      debugPrint("카카오 로그인 오류: $e");
-      debugPrint("스택 트레이스: $stackTrace");
+    } catch (e) {
+      debugPrint('카캌오 서버 연동 실패: $e');
 
       if (!mounted) return;
-
-      final errorMessage = e.toString().length > 100
-          ? '${e.toString().substring(0, 100)}...'
-          : e.toString();
-
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('카카오 로그인 실패: $errorMessage'),
-          backgroundColor: Colors.red[400],
-        ),
+        SnackBar(content: Text('카카오 서버 로그인 실패: ${e.toString()}'), backgroundColor: Colors.red[300]),
       );
     }
   }
-
 
   Widget _buildPage(String title, String message, String imagePath) {
     return Column(
@@ -98,24 +124,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         const SizedBox(height: 100),
         Image.asset(imagePath, height: 420),
         const SizedBox(height: 24),
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: AppSizes.font20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        Text(title, style: const TextStyle(fontSize: AppSizes.font20, fontWeight: FontWeight.bold)),
         const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Text(
-            message,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: AppSizes.font16,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          child: Text(message, textAlign: TextAlign.center, style: const TextStyle(fontSize: AppSizes.font16)),
         ),
       ],
     );
@@ -139,11 +152,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/images/icon/kakao.png',
-                  width: AppSizes.iconM,
-                  height: AppSizes.iconM,
-                ),
+                Image.asset('assets/images/icon/kakao.png', width: AppSizes.iconM, height: AppSizes.iconM),
                 const SizedBox(width: 8),
                 const Text("카카오톡으로 시작하기"),
               ],
@@ -153,8 +162,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
     } else {
       return Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppSizes.paddingL, vertical: AppSizes.paddingM),
+        padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingL, vertical: AppSizes.paddingM),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -168,9 +176,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     height: 8,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: _currentIndex == index
-                          ? Colors.teal
-                          : AppColors.gray100,
+                      color: _currentIndex == index ? Colors.teal : AppColors.gray100,
                     ),
                   ),
                 );
@@ -178,12 +184,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             TextButton(
               onPressed: () {
-                _pageController.nextPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut);
+                _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
               },
-              child: const Text("다음",
-                  style: TextStyle(color: AppColors.primary)),
+              child: const Text("다음", style: TextStyle(color: AppColors.primary)),
             ),
           ],
         ),
@@ -208,11 +211,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               controller: _pageController,
               itemCount: messages.length,
               onPageChanged: _onPageChanged,
-              itemBuilder: (_, index) => _buildPage(
-                titles[index],
-                messages[index],
-                imagePaths[index],
-              ),
+              itemBuilder: (_, index) => _buildPage(titles[index], messages[index], imagePaths[index]),
             ),
           ),
           _buildBottomBar(),

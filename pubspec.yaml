@@ -12,6 +12,7 @@ dependencies:
   kakao_flutter_sdk_user: ^1.6.0
   shared_preferences: ^2.2.2
   cupertino_icons: ^1.0.8
+  dio: ^5.4.0
 
 dev_dependencies:
   flutter_test:
