@@ -108,16 +108,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         MaterialPageRoute(builder: (_) => const SignupScreen()),
       );
     } catch (e) {
-      debugPrint('카캌오 서버 연동 실패: $e');
+      if (e is DioException) {
+        debugPrint('서버 Dio Error - 카카오 서버 연동 실패');
+        debugPrint('서버 StatusCode: ${e.response?.statusCode}');
+        debugPrint('서버 Response data: ${e.response?.data}');
+        debugPrint('서버 Request: ${e.requestOptions.path}');
+      } else {
+        debugPrint('에러 (알 수 없는 에러): $e');
+      }
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('카카오 서버 로그인 실패: ${e.toString()}'), backgroundColor: Colors.red[300]),
+        SnackBar(
+          content: Text('카카오 서버 로그인 실패: ${e is DioException ? e.response?.data
+              .toString() ?? e.message : e.toString()}'),
+          backgroundColor: Colors.red[300],
+        ),
       );
     }
   }
 
-  Widget _buildPage(String title, String message, String imagePath) {
+    Widget _buildPage(String title, String message, String imagePath) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
