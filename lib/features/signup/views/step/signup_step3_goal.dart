@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../../core/ui/components/text/app_dropdown.dart';
 import '../../../../core/ui/components/text/section_title.dart';
+import '../../../../core/utils/json_loader.dart';
 
-class SignupStep3Goal extends StatelessWidget {
+class SignupStep3Goal extends StatefulWidget {
   final TextEditingController nicknameController;
   final String? selectedGoalSchool;
   final String? selectedGoalMajor;
@@ -19,6 +20,26 @@ class SignupStep3Goal extends StatelessWidget {
   });
 
   @override
+  State<SignupStep3Goal> createState() => _SignupStep3GoalState();
+}
+
+class _SignupStep3GoalState extends State<SignupStep3Goal> {
+  Map<String, List<String>> universityMajorMap = {};
+  List<String> universityList = [];
+  List<String> majorList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadUniversityMajorMap().then((map) {
+      setState(() {
+        universityMajorMap = map;
+        universityList = map.keys.toList();
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,23 +50,24 @@ class SignupStep3Goal extends StatelessWidget {
         ),
         AppDropdown<String>(
           title: '희망 대학교',
-          items: ['서울대학교', '연세대학교', '고려대학교', '서강대', '성균관대', '한양대'],
+          items: universityList,
           hint: '희망하시는 대학교를 선택해주세요',
-          value: selectedGoalSchool,
-          onChanged: onGoalSchoolChanged,
+          value: widget.selectedGoalSchool,
+          onChanged: (school) {
+            final majors = universityMajorMap[school] ?? [];
+            setState(() {
+              majorList = majors;
+            });
+            widget.onGoalSchoolChanged(school);
+          },
           hintText: '',
         ),
         AppDropdown<String>(
           title: '희망 전공',
-          items: [
-            '컴퓨터공학과',
-            '소프트웨어공학과',
-            '정보통신공학과',
-            '인공지능학과',
-          ],
+          items: majorList,
           hint: '희망하시는 전공을 선택해주세요',
-          value: selectedGoalMajor,
-          onChanged: onGoalMajorChanged,
+          value: widget.selectedGoalMajor,
+          onChanged: widget.onGoalMajorChanged,
           hintText: '',
         ),
       ],
