@@ -47,8 +47,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _startKakaoLogin() async {
     try {
-      KakaoSdk.init(nativeAppKey: 'a19586ddd9ab7a34283d45abe1022db1');
-
       final isInstalled = await isKakaoTalkInstalled();
       debugPrint("카카오 설치 여부: $isInstalled");
 
@@ -60,14 +58,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       debugPrint("카카오 AccessToken: ${token.accessToken}");
       debugPrint("카카오 RefreshToken: ${token.refreshToken}");
 
-      // 사용자 정보 출력
       final user = await UserApi.instance.me();
-      debugPrint("카카오 사용자 정보 (이름): ${user.kakaoAccount?.profile?.nickname}");
-      debugPrint("카카오 사용자 정보 (이메일): ${user.kakaoAccount?.email}");
+      debugPrint("카카오 사용자 이름: ${user.kakaoAccount?.profile?.nickname}");
+      debugPrint("카카오 이메일: ${user.kakaoAccount?.email}");
 
-      // 백엔드와 연동
       await _sendTokenToBackend(token.accessToken);
-
     } catch (e, stackTrace) {
       debugPrint("카카오 로그인 실패: $e");
       debugPrint("스택 트레이스: $stackTrace");
@@ -84,51 +79,51 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _sendTokenToBackend(String kakaoAccessToken) async {
     final dio = Dio();
     try {
-      // JWT 발급해주는 post API가 필요 -> 준규님 답변 대기중
       final response = await dio.post(
         'https://ipsidori.o-r.kr/api/v1/auth/oauth2/kakao',
-        data: {
-          'accessToken': kakaoAccessToken,
-        },
+        data: {'accessToken': kakaoAccessToken},
+        options: Options(headers: {'Content-Type': 'application/json'}),
       );
 
-      final accessToken = response.data['accessToken'];
-      final refreshToken = response.data['refreshToken'];
+      final accessToken = response.headers['authorization']?.first;
+      final refreshToken = response.headers['refresh-token']?.first;
+      final isSignupRequired = response.data['data']['isSignupRequired'] as bool;
 
-      debugPrint('카카오 서버 accessToken: $accessToken');
-      debugPrint('카카오 서버 refreshToken: $refreshToken');
+      debugPrint('서버 AccessToken: $accessToken');
+      debugPrint('서버 RefreshToken: $refreshToken');
+      debugPrint('회원가입 필요 여부: $isSignupRequired');
 
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('카카오 accessToken', accessToken);
-      await prefs.setString('카카오 refreshToken', refreshToken);
-
-      if (!mounted) return;
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const SignupScreen()),
-      );
-    } catch (e) {
-      if (e is DioException) {
-        debugPrint('서버 Dio Error - 카카오 서버 연동 실패');
-        debugPrint('서버 StatusCode: ${e.response?.statusCode}');
-        debugPrint('서버 Response data: ${e.response?.data}');
-        debugPrint('서버 Request: ${e.requestOptions.path}');
-      } else {
-        debugPrint('에러 (알 수 없는 에러): $e');
+      if (accessToken != null && refreshToken != null) {
+        await prefs.setString('accessToken', accessToken);
+        await prefs.setString('refreshToken', refreshToken);
       }
 
       if (!mounted) return;
+
+      if (isSignupRequired) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const SignupScreen()),
+        );
+      } else {
+        // TODO: 로그인 완료 후 홈 화면 등으로 이동
+        // Navigator.pushReplacement(context, MaㅊterialPageRoute(builder: (_) => const HomeScreen()));
+      }
+    } catch (e) {
+      debugPrint('서버 로그인 실패: $e');
+      if (!mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('카카오 서버 로그인 실패: ${e is DioException ? e.response?.data
-              .toString() ?? e.message : e.toString()}'),
+          content: Text('서버 로그인 실패: ${e.toString()}'),
           backgroundColor: Colors.red[300],
         ),
       );
     }
   }
 
-    Widget _buildPage(String title, String message, String imagePath) {
+  Widget _buildPage(String title, String message, String imagePath) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -146,63 +141,60 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildBottomBar() {
-    if (_currentIndex == messages.length - 1) {
-      return Padding(
-        padding: const EdgeInsets.all(AppSizes.paddingXL),
-        child: SizedBox(
-          child: ElevatedButton(
-            onPressed: _startKakaoLogin,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.yellow,
-              foregroundColor: AppColors.gray800,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSizes.radiusM),
-              ),
-              minimumSize: const Size.fromHeight(56),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/images/icon/kakao.png', width: AppSizes.iconM, height: AppSizes.iconM),
-                const SizedBox(width: 8),
-                const Text("카카오톡으로 시작하기"),
-              ],
-            ),
+    final isLastPage = _currentIndex == messages.length - 1;
+    return Padding(
+      padding: const EdgeInsets.all(AppSizes.paddingXL),
+      child: isLastPage
+          ? ElevatedButton(
+        onPressed: _startKakaoLogin,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.yellow,
+          foregroundColor: AppColors.gray800,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSizes.radiusM),
           ),
+          minimumSize: const Size.fromHeight(56),
         ),
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingL, vertical: AppSizes.paddingM),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("건너뛰기", style: TextStyle(color: AppColors.gray300)),
-            Row(
-              children: List.generate(messages.length, (index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: _currentIndex == index ? Colors.teal : AppColors.gray100,
-                    ),
-                  ),
-                );
-              }),
-            ),
-            TextButton(
-              onPressed: () {
-                _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-              },
-              child: const Text("다음", style: TextStyle(color: AppColors.primary)),
-            ),
+            Image.asset('assets/images/icon/kakao.png', width: AppSizes.iconM, height: AppSizes.iconM),
+            const SizedBox(width: 8),
+            const Text("카카오톡으로 시작하기"),
           ],
         ),
-      );
-    }
+      )
+          : Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text("건너뛰기", style: TextStyle(color: AppColors.gray300)),
+          Row(
+            children: List.generate(messages.length, (index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _currentIndex == index ? Colors.teal : AppColors.gray100,
+                  ),
+                ),
+              );
+            }),
+          ),
+          TextButton(
+            onPressed: () {
+              _pageController.nextPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              );
+            },
+            child: const Text("다음", style: TextStyle(color: AppColors.primary)),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
