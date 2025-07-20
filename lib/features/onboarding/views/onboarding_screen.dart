@@ -167,7 +167,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           : Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text("건너뛰기", style: TextStyle(color: AppColors.gray300)),
+          TextButton(
+            onPressed: () {
+              _pageController.animateToPage(
+                messages.length - 1,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              );
+            },
+            child: const Text("건너뛰기", style: TextStyle(color: AppColors.gray300)),
+          ),
           Row(
             children: List.generate(messages.length, (index) {
               return Padding(
@@ -194,6 +203,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ],
       ),
+
     );
   }
 
