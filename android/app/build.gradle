@@ -28,6 +28,11 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        // kakao social login
+        manifestPlaceholders = [
+                kakaoScheme: "kakaoa19586ddd9ab7a34283d45abe1022db1"
+        ]
     }
 
     buildTypes {
